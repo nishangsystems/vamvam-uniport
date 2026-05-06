@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+:root {
+
+--color-primary-50: #FFF7DB;
+--color-primary-100: #FFE9A3;
+--color-primary-200: #FFD86B;
+--color-primary-300: #FFC933;
+--color-primary-400: #F5B400;
+--color-primary-500: #E6A500; /* main button */
+--color-primary-600: #D49500;
+--color-primary-700: #B87F00;
+--color-primary-800: #9A6A00;
+--color-primary-900: #7A5200;
+
+--color-bg-dark: #0B1426;
+--color-bg-dark-2: #0F1B34;
+--color-bg-dark-3: #13213F;
+
+
+--color-card-bg: #1B2A41;
+--color-card-bg-light: #22324D;
+--color-card-border: #2A3B5C;
+
+--color-text-primary: #E5E7EB;
+--color-text-secondary: #9CA3AF;
+--color-text-muted: #6B7280;
+--color-text-dark: #111827;
+
+
+--color-bg-light: #F3F4F6;
+
+--color-icon-gold: #E6A500;
+--color-icon-dark: #111827;
+
+--gradient-hero: linear-gradient(
+135deg,
+var(--color-bg-dark) 0%,
+var(--color-bg-dark-2) 40%,
+var(--color-bg-dark-3) 100%
+);
+
+ --gradient-primary: linear-gradient(
+    90deg,
+    var(--color-primary-600) 0%,
+    var(--color-primary-400) 70%,
+    var(--color-primary-300) 100%
+  );
+}
+
+@theme {
+  
+  /* Primary Colors */
+  --color-primary-50: var(--color-primary-50);
+  --color-primary-100: var(--color-primary-100);
+  --color-primary-200: var(--color-primary-200);
+  --color-primary-300: var(--color-primary-300);
+  --color-primary-400: var(--color-primary-400);
+  --color-primary-500: var(--color-primary-500);
+  --color-primary-600: var(--color-primary-600);
+  --color-primary-700: var(--color-primary-700);
+  --color-primary-800: var(--color-primary-800);
+  --color-primary-900: var(--color-primary-900);
+  
+  /* Background Colors */
+  --color-bg-dark: var(--color-bg-dark);
+  --color-bg-dark-2: var(--color-bg-dark-2);
+  --color-bg-dark-3: var(--color-bg-dark-3);
+  --color-bg-light: var(--color-bg-light);
+  
+  /* Card Colors */
+  --color-card-bg: var(--color-card-bg);
+  --color-card-bg-light: var(--color-card-bg-light);
+  --color-card-border: var(--color-card-border);
+  
+  /* Text Colors */
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-dark: var(--color-text-dark);
+  
+  /* Icon Colors */
+  --color-icon-gold: var(--color-icon-gold);
+  --color-icon-dark: var(--color-icon-dark);
+
+  --animate-fade-in-scale: fade-in-scale 0.7s ease-out;
+  @keyframes fade-in-scale {
+    0% {
+      opacity: 0;
+      transform:   translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform:  transform: translateY(0);
+    }
+  }
+}
+
+@utility bg-primary-gradient {
+  background: var(--gradient-primary);
+}
+
