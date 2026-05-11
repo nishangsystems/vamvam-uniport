@@ -13,7 +13,8 @@ const AppLayout = () => {
       
       <div className="h-screen">
         <Header />
-        <div className="animate-fade-in-scale">
+        {/* <div className="animate-fade-in-scale"> */}
+        <div>
           <Outlet />
         </div>
         <Footer />
