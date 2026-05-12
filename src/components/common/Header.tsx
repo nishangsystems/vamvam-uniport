@@ -1,8 +1,7 @@
-import { ChevronDown, Globe, Menu, Sun, X } from "lucide-react";
-import { useState } from "react";
+import { ChevronDown, Globe, Menu, Moon, Sun, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import Button from "../ui/Button";
 
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
     { label: "Product", hasDropdown: true },
@@ -11,17 +10,44 @@ const Header = () => {
     { label: "About VamVam Uniport", hasDropdown: false },
   ];
 
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+const [isDarkMode, setIsDarkMode] = useState(() => {
+  return localStorage.getItem("theme") === "dark";
+});
+
+useEffect(() => {
+  if (isDarkMode) {
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+    localStorage.setItem("theme", "light");
+  }
+}, [isDarkMode]);
+
+const toggleTheme = () => {
+  setIsDarkMode((prev) => !prev);
+};
+
+
   return (
-    <div className="bg-bg-dark sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4 text-white">
+    <nav className="fixed top-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-white ">
         <div className="flex items-center justify-between">
           {/* Logo Section */}
           <div className="flex items-center space-x-3">
             <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[var(--color-primary-600)] via-[var(--color-primary-400)] to-[var(--color-primary-300)] bg-clip-text text-transparent">
               VamVam Uniport
             </h1>
-            <Sun color="#E6A500" size={20} className="hidden sm:block" />
-          </div>
+      
+{isDarkMode ? (
+  <Sun onClick={toggleTheme} size={20} className="hidden sm:block cursor-pointer" />
+) : (
+  <Moon onClick={toggleTheme} size={20} className="hidden sm:block cursor-pointer" />
+)} 
+</div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
@@ -38,9 +64,9 @@ const Header = () => {
               <Globe size={18} />
               <span>EN</span>
             </div>
-            <button className="bg-primary-500 px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors">
+            <Button>
               Contact Sales
-            </button>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -78,7 +104,7 @@ const Header = () => {
           </div>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 

@@ -7,34 +7,29 @@ import {
   BookOpen,
   Building2,
   CircleCheckBig,
-  Cloud,
   CreditCard,
-  DollarSign,
   Download,
   FileText,
   GraduationCap,
-  LayoutDashboard,
   Mail,
   MapPin,
   MessageCircle,
   Phone,
   Play,
   Quote,
-  RefreshCw,
-  Server,
   Settings,
-  Shield,
-  Smartphone,
   SquareUserRound,
   Star,
   UserCheck,
-  UserPlus,
   Users,
   Video,
-  Wifi,
-  WifiOff,
 } from "lucide-react";
 import { useState } from "react";
+import AnimatedBackground from "../components/animations/AnimatedBackground";
+import SoftwarePreview from "../components/SoftwarePreview";
+import DashboardDemo from "../components/DashboardDemo";
+import Features from "../components/Features";
+import PlatformAccess from "../components/PlatformAccess";
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState<
@@ -52,30 +47,30 @@ const HomePage = () => {
       />
 
       {/* Hero Section - Fade In */}
-      <section className="bg-card-bg">
-        <div className="max-w-7xl mx-auto px-6 py-20">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 via-white to-yellow-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <div className="flex flex-wrap items-center justify-between gap-10">
             <ScrollAnimation animation="slide-left" className="flex-1">
               <h1 className="text-white text-6xl font-medium mb-5">
                 Connect, Learn, and Grow Together with VamVam Uniport
               </h1>
-              <h4 className="text-secondary text-lg">
+              <h4 className="text-secondary-100 text-lg">
                 The all-in-one platform that makes education engaging, seamless,
                 and effective for schools, teachers, and students. Real-time
                 collaboration, interactive tools, and powerful insights — all in
                 one place.
               </h4>
-            <div className="flex flex-col md:flex-row gap-3 mb-12 mt-8">
-  <Button size="lg" className="w-full md:w-auto">
-    <Download /> Download
-  </Button>
-  <Button variant="secondary" size="lg" className="w-full md:w-auto">
-    <Play /> Watch 2-Min Demo
-  </Button>
-</div>
+              <div className="flex flex-col md:flex-row gap-3 md:gap-1 mb-12 mt-8">
+                <Button className="w-full md:w-auto">
+                  <Download /> Download
+                </Button>
+                <Button variant="secondary" className="w-full md:w-auto">
+                  <Play /> Watch 2-Min Demo
+                </Button>
+              </div>
               <div className="bg-bg-light h-0.5"></div>
               <div className="mt-5">
-                <span className="text-secondary text-sm">
+                <span className="text-secondary-100 text-sm">
                   Trusted by leading institutions
                 </span>
                 <StaggeredAnimation
@@ -85,7 +80,7 @@ const HomePage = () => {
                 >
                   {["BIAKA", "HIMS", "ST LOUIS", "DEX", "DAJA", "GRACIOUS"].map(
                     (name, idx) => (
-                      <h4 key={idx} className="text-muted">
+                      <h4 key={idx} className="text-secondary-200">
                         {name}
                       </h4>
                     ),
@@ -117,16 +112,19 @@ const HomePage = () => {
       </section>
 
       {/* What is VamVam Uniport Section */}
-      <section>
+      <section
+        id="about"
+        className="py-20 bg-white dark:bg-gray-900 relative overflow-hidden"
+      >
         <div className="max-w-7xl px-6 mx-auto py-20">
           <div className="text-center mb-20">
             <ScrollAnimation animation="slide-left">
-              <h1 className="text-5xl mb-6 font-medium">
+              <h1 className="text-5xl text-secondary-50 mb-6 font-medium">
                 What is VamVam Uniport?
               </h1>
             </ScrollAnimation>
             <ScrollAnimation animation="slide-right" delay={0.2}>
-              <h4 className="text-2xl/10 text-text-muted md:mx-64">
+              <h4 className="text-xl/7 text-secondary-100 md:max-w-4xl mx-auto">
                 VamVam Uniport is a complete school management system designed
                 to solve the common challenges institutions face with manual
                 processes, scattered records, and inefficient communication.
@@ -154,19 +152,21 @@ const HomePage = () => {
                     desc: "From admissions to academics, finance to communication — VamVam Uniport brings everything together in one powerful platform.",
                   },
                 ].map((item, idx) => (
-                  <div key={idx} className="flex gap-4">
+                  <div key={idx} className="flex gap-4 mb-6">
                     <div>
                       <CircleCheckBig color="#B87F00" />
                     </div>
                     <div>
-                      <h2 className="font-medium text-xl mb-2">{item.title}</h2>
-                      <p className="text-text-muted">{item.desc}</p>
+                      <h2 className="font-medium text-xl mb-2 text-secondary-50">
+                        {item.title}
+                      </h2>
+                      <p className="text-secondary-100">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </StaggeredAnimation>
               <div className="mt-12">
-                <Button size="lg">See How It Works</Button>
+                <Button>See How It Works</Button>
               </div>
             </div>
 
@@ -190,253 +190,32 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      <section className="py-10 bg-white dark:bg-gray-900 relative overflow-hidden">
+        <SoftwarePreview />
+      </section>
+      <section>
+        {" "}
+        <DashboardDemo />
+      </section>
 
       {/* Powerful Features Section */}
-      <section className="bg-bg-dark py-28">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <ScrollAnimation animation="slide-left">
-              <h1 className="text-primary text-5xl">
-                Powerful Features for Modern Education
-              </h1>
-            </ScrollAnimation>
-            <ScrollAnimation animation="slide-right" delay={0.2}>
-              <h4 className="text-muted mt-2 text-lg">
-                Everything you need to run your institution smoothly, all in one
-                platform
-              </h4>
-            </ScrollAnimation>
-          </div>
-          <StaggeredAnimation
-            animation="scale"
-            staggerDelay={0.1}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
-            {[
-              {
-                icon: Building2,
-                title: "Multi-Campus Support",
-                desc: "Works for schools that have more than one campus, all under one system",
-                color: "gold",
-              },
-              {
-                icon: UserPlus,
-                title: "Online Admission and Registration",
-                desc: "Students can apply and register online without physical lines.",
-                color: "dark",
-              },
-              {
-                icon: GraduationCap,
-                title: "Students Records & Academic Progress",
-                desc: "Teachers and Administrators can record grades, track GPA and manage transcripts in one place",
-                color: "gold",
-              },
-              {
-                icon: Smartphone,
-                title: "Mobile App for Students",
-                desc: "Students can login, see their grades, announcements, class schedule and more from their phones.",
-                color: "dark",
-              },
-              {
-                icon: DollarSign,
-                title: "Financial Management",
-                desc: "School can track fees, payments, and generate financial reports",
-                color: "gold",
-              },
-              {
-                icon: LayoutDashboard,
-                title: "Dashboard for Everyone",
-                desc: "Separate dashboards for students, teachers, parents, finance staff and administrators",
-                color: "gold",
-              },
-            ].map((feature, idx) => (
-              <div
-                key={idx}
-                className="bg-card-bg border border-muted rounded-xl p-8 hover:scale-105 transition-transform duration-300"
-              >
-                <div
-                  className={`inline-block ${feature.color === "gold" ? "bg-icon-gold" : "bg-icon-dark"} rounded-2xl p-4 mb-4`}
-                >
-                  <feature.icon className="text-white" size={40} />
-                </div>
-                <div>
-                  <h4 className="text-primary text-lg font-semibold mb-4">
-                    {feature.title}
-                  </h4>
-                  <p className="text-muted">{feature.desc}</p>
-                </div>
-              </div>
-            ))}
-          </StaggeredAnimation>
-          <ScrollAnimation
-            animation="slide-bottom"
-            className="text-center mt-20"
-          >
-            <h4 className="text-muted text-md mb-1">
-              Ready to transform your institution?
-            </h4>
-            <Button size="lg" className="mt-4">
-              Get Started with VamVam Uniport
-            </Button>
-          </ScrollAnimation>
-        </div>
-      </section>
+
+      <Features />
 
       {/* Flexible Access Section */}
-      <section>
-        <div className="max-w-7xl mx-auto px-6 py-20">
-          <div className="text-center mb-20">
-            <ScrollAnimation animation="slide-left">
-              <h1 className="text-5xl mb-4">
-                Flexible Access – Web, Mobile, Online & On-Premise
-              </h1>
-            </ScrollAnimation>
-            <ScrollAnimation animation="slide-right" delay={0.2}>
-              <h4 className="text-secondary text-lg">
-                VamVam Uniport adapts to your needs with multiple access options
-                and deployment flexibility
-              </h4>
-            </ScrollAnimation>
-          </div>
-          <div className="flex flex-wrap justify-between gap-16 mb-8">
-            <ScrollAnimation animation="slide-left" className="flex-1">
-              <div className="mb-3">
-                <h2 className="text-2xl font-medium text-text-dark mb-3">
-                  Flexible Deployment Options
-                </h2>
-                <p className="text-muted">
-                  VamVam Uniport is built to work in any environment, giving you
-                  complete control over how and where your data is stored.
-                </p>
-              </div>
-              <div className="space-y-4">
-                <div className="rounded-xl p-6 transition duration-300 ease-in-out hover:-translate-y-1">
-                  <div className="flex gap-4">
-                    <div>
-                      <div className="inline-flex p-2 rounded-xl bg-blue-300/60">
-                        <Cloud className="text-blue-800" />
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-lg mb-2">
-                        Online (Cloud)
-                      </h4>
-                      <p className="text-muted text-sm">
-                        Full access with automatic updates and highest
-                        performance. Perfect for institutions with reliable
-                        internet.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="rounded-xl p-6 transition duration-300 ease-in-out hover:-translate-y-1">
-                  <div className="flex gap-4">
-                    <div>
-                      <div className="inline-flex p-2 rounded-xl bg-purple-200">
-                        <Server className="text-purple-700" />
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-lg mb-2">On-Premise</h4>
-                      <p className="text-muted text-sm">
-                        Full control over your data with local hosting. Perfect
-                        for institutions requiring maximum security.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ScrollAnimation>
-
-            <ScrollAnimation
-              animation="slide-right"
-              className="flex-1 rounded-xl bg-bg-dark flex items-center justify-center py-16"
-            >
-              <div className="relative flex items-center justify-center w-full max-w-xl">
-                <svg
-                  className="absolute w-full h-40 pointer-events-none"
-                  viewBox="0 0 500 160"
-                  fill="none"
-                >
-                  <path
-                    d="M0 110 C140 10, 260 10, 310 110"
-                    stroke="#E6A500"
-                    strokeWidth="1.7"
-                    strokeLinecap="round"
-                    strokeDasharray="4 6"
-                    className="animate-dash z-40"
-                  />
-                </svg>
-                <div className="bg-icon-gold flex flex-col items-center p-6 text-white rounded-xl animate-[floatUp_2.5s_ease-in-out_infinite]">
-                  <Cloud size={42} strokeWidth={2.5} />
-                  <span>Cloud</span>
-                </div>
-                <div className="mx-4 z-10">
-                  <RefreshCw
-                    className="text-primary-300 animate-[spin_4s_linear_infinite]"
-                    size={32}
-                    strokeWidth={2}
-                  />
-                </div>
-                <div className="bg-card-bg flex flex-col items-center p-6 text-white rounded-xl animate-[floatDown_2.5s_ease-in-out_infinite] z-10">
-                  <Server size={42} strokeWidth={2.5} />
-                  <span>Server</span>
-                </div>
-              </div>
-            </ScrollAnimation>
-          </div>
-
-          {/* Synchronization Section */}
-          <ScrollAnimation animation="scale">
-            <div className="bg-primary-gradient rounded-3xl p-4 md:p-12">
-              <div className="text-center space-y-4 mb-8">
-                <div className="inline-flex p-4 rounded-full bg-black/10">
-                  <RefreshCw size={32} strokeWidth={2} />
-                </div>
-                <h2 className="text-3xl font-medium">
-                  Seamless Synchronization
-                </h2>
-                <p className="md:max-w-3xl mx-auto text-lg">
-                  Data automatically syncs between your Online and On-Premise
-                  servers whenever internet is available
-                </p>
-              </div>
-              <StaggeredAnimation
-                animation="slide-bottom"
-                staggerDelay={0.1}
-                className="grid grid-cols-1 md:grid-cols-4 gap-6"
-              >
-                {[
-                  { icon: WifiOff, text: "Work fully offline when needed" },
-                  { icon: Shield, text: "Complete data ownership" },
-                  { icon: RefreshCw, text: "Automatic two-way sync" },
-                  { icon: Wifi, text: "Sync when online" },
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="inline-flex flex-col justify-center items-center py-7 px-12 rounded-xl bg-black/7 text-center"
-                  >
-                    <item.icon size={35} strokeWidth={1.8} />
-                    <p className="mt-2">{item.text}</p>
-                  </div>
-                ))}
-              </StaggeredAnimation>
-            </div>
-          </ScrollAnimation>
-        </div>
-      </section>
+      <PlatformAccess />
 
       {/* Account Types Section */}
       <section>
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="text-center mb-20">
             <ScrollAnimation animation="slide-left">
-              <h1 className="text-5xl mb-4">
+              <h1 className="mb-4 text-4xl md:text-5xl mb-4 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
                 Built for Everyone Four Powerful Account Types
               </h1>
             </ScrollAnimation>
             <ScrollAnimation animation="slide-right" delay={0.2}>
-              <h4 className="text-secondary text-lg">
+              <h4 className="text-secondary-100 text-lg">
                 VamVam Uniport provides a dedicated, role-specific experience
                 for every member of the education ecosystem
               </h4>
@@ -480,43 +259,43 @@ const HomePage = () => {
                       <h2 className="text-3xl font-medium mb-4">
                         Student Account
                       </h2>
-                      <p className="text-muted text-lg mb-8">
+                      <p className="text-secondary-200 text-lg mb-8">
                         Learning made engaging and organized
                       </p>
                       <div className="space-y-5">
                         <div className="flex items-center gap-2">
                           <CircleCheckBig className="text-blue-500" />{" "}
-                          <p className="text-muted">
+                          <p className="text-secondary-200">
                             Join live interactive classes with one tap
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
                           <CircleCheckBig className="text-blue-500" />{" "}
-                          <p className="text-muted">
+                          <p className="text-secondary-200">
                             Access recorded lectures and materials anytime
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
                           <CircleCheckBig className="text-blue-500" />{" "}
-                          <p className="text-muted">
+                          <p className="text-secondary-200">
                             Submit assignments and receive instant feedback
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
                           <CircleCheckBig className="text-blue-500" />{" "}
-                          <p className="text-muted">
+                          <p className="text-secondary-200">
                             Collaborate with classmates in real-time group rooms
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
                           <CircleCheckBig className="text-blue-500" />{" "}
-                          <p className="text-muted">
+                          <p className="text-secondary-200">
                             Track personal academic progress and performance
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
                           <CircleCheckBig className="text-blue-500" />{" "}
-                          <p className="text-muted">
+                          <p className="text-secondary-200">
                             Receive important announcements and reminders
                           </p>
                         </div>
@@ -567,13 +346,13 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="bg-gradient-to-br from-[var(--color-bg-dark)] via-[var(--color-bg-dark-2)] to-[var(--color-bg-dark-3)]">
+      <section className="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="text-center mb-20">
-            <h1 className="text-5xl mb-4 text-primary">
+            <h1 className="text-primary text-4xl md:text-5xl mb-4 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
               Complete Solutions for Every Need
             </h1>
-            <h4 className="text-secondary text-lg">
+            <h4 className="text-secondary-100 text-lg">
               VamVam Uniport brings the entire university or school system into
               one digital platform
             </h4>
@@ -584,7 +363,7 @@ const HomePage = () => {
             {[
               {
                 icon: Users,
-                iconBg: "bg-icon-gold",
+                iconBg: "bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center mb-6",
                 title: "Student Management Solutions",
                 subtitle:
                   "These focus on helping students access everything easily:",
@@ -612,7 +391,7 @@ const HomePage = () => {
               },
               {
                 icon: Award,
-                iconBg: "bg-icon-gold",
+                iconBg: "bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center mb-6",
                 title: "Results & Performance Management",
                 subtitle: "Automated and transparent academic tracking:",
                 features: [
@@ -625,7 +404,7 @@ const HomePage = () => {
               },
               {
                 icon: Settings,
-                iconBg: "bg-icon-gold",
+                iconBg: "bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center mb-6",
                 title: "Academic Administration Solutions",
                 subtitle: "From broader system capabilities:",
                 features: [
@@ -638,7 +417,7 @@ const HomePage = () => {
               },
               {
                 icon: CreditCard,
-                iconBg: "bg-icon-gold",
+                iconBg: "bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center mb-6",
                 title: "Financial & Payment Integration",
                 subtitle: "If enabled in deployment:",
                 features: ["Online fee payments", "Financial tracking"],
@@ -666,33 +445,35 @@ const HomePage = () => {
                   threshold={0.3}
                   className="h-full"
                 >
-                  <div className="bg-card-bg border border-muted rounded-xl p-8 h-full">
+                  <div className="  h-full bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 dark:border-gray-700">
                     <div
                       className={`inline-block ${solution.iconBg} rounded-2xl p-4 mb-4`}
                     >
                       <solution.icon className="text-white" size={40} />
                     </div>
                     <div>
-                      <h4 className="text-primary text-lg font-semibold mb-4">
+                      <h4 className="font-semibold text-2xl mb-3 text-gray-900 dark:text-white">
                         {solution.title}
                       </h4>
-                      <p className="text-muted text-lg mb-4">
+                      <p className="text-secondary-100 text-lg mb-4">
                         {solution.subtitle}
                       </p>
                     </div>
-                    <div className="space-y-4 mb-4">
+                    <div className="space-y-4 mb-4 text-primary">
                       {solution.features.map((feature, fIdx) => (
                         <div key={fIdx} className="flex items-center gap-2">
                           <div className="w-1 h-1 rounded-full bg-primary-400"></div>
-                          <p className="text-primary">{feature}</p>
+                          <p className="text-secondary-200">{feature}</p>
                         </div>
                       ))}
                     </div>
                     <div className="h-px w-full bg-muted"></div>
-                    <p className="text-muted text-xs mt-4 mb-2">
+                    <p className="text-secondary-200 text-xs mt-4 mb-2">
                       👉 Problem it solves:
                     </p>
-                    <p className="text-primary">{solution.problemSolved}</p>
+                    <p className="text-secondary-100">
+                      {solution.problemSolved}
+                    </p>
                   </div>
                 </ScrollAnimation>
               );
@@ -701,14 +482,12 @@ const HomePage = () => {
 
           {/* Bottom Line Section */}
           <ScrollAnimation animation="scale" threshold={0.3}>
-            <div className="flex justify-center items-center rounded-xl bg-primary-400 mb-20">
-              <div className="text-center p-8">
-                <h2 className="text-2xl font-bold mb-2">Bottom Line</h2>
-                <p className="text-lg">
-                  VamVam Uniport is solving one big problem: bringing the entire
-                  university or school system into one digital platform.
-                </p>
-              </div>
+            <div className="text-center p-12 mb-20  bg-gradient-to-r from-primary-600 to-primary-500 rounded-3xl shadow-2xl">
+              <h2 className="text-4xl  mb-2">Bottom Line</h2>
+              <p className="md:max-w-3xl text-xl mx-auto">
+                VamVam Uniport is solving one big problem: bringing the entire
+                university or school system into one digital platform.
+              </p>
             </div>
           </ScrollAnimation>
 
@@ -716,8 +495,8 @@ const HomePage = () => {
           <div>
             <div className="text-center mb-20">
               <ScrollAnimation animation="slide-left" threshold={0.3}>
-                <h1 className="text-5xl mb-4">
-                  Built for Everyone Four Powerful Account Types
+                <h1 className="text-4xl md:text-5xl mb-4 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                  Comprehensive Resource Library
                 </h1>
               </ScrollAnimation>
               <ScrollAnimation
@@ -725,9 +504,8 @@ const HomePage = () => {
                 threshold={0.3}
                 delay={0.2}
               >
-                <h4 className="text-secondary text-lg">
-                  VamVam Uniport provides a dedicated, role-specific experience
-                  for every member of the education ecosystem
+                <h4 className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                  Everything your institution needs, organized and accessible
                 </h4>
               </ScrollAnimation>
             </div>
@@ -834,10 +612,10 @@ const HomePage = () => {
                       <resource.icon className="text-white" size={25} />
                     </div>
                     <div>
-                      <h4 className="text-primary text-lg font-semibold mb-2">
+                      <h4 className="text-secondary-50 text-lg font-semibold mb-2">
                         {resource.title}
                       </h4>
-                      <p className="text-muted text-sm mb-2">
+                      <p className="text-secondary-100 text-sm mb-2">
                         {resource.subtitle}
                       </p>
                     </div>
@@ -845,12 +623,14 @@ const HomePage = () => {
                       {resource.features.map((feature, fIdx) => (
                         <div key={fIdx} className="flex items-center gap-2">
                           <div className="w-1 h-1 rounded-full bg-primary-400"></div>
-                          <p className="text-primary text-sm">{feature}</p>
+                          <p className="text-secondary-200 text-sm">
+                            {feature}
+                          </p>
                         </div>
                       ))}
                     </div>
                     <div className="h-px w-full bg-muted"></div>
-                    <p className="text-muted mt-2 text-xs italic">
+                    <p className="text-secondary-200 mt-2 text-xs italic">
                       {resource.note}
                     </p>
                   </div>
@@ -858,103 +638,108 @@ const HomePage = () => {
               ))}
             </div>
             <div className="flex justify-center items-center mt-20">
-              <div className="bg-card-bg p-8 flex-col justify-ceenter items-center rounded-xl text-center">
-                <h2 className="text-lg text-white">
+              <div className="inline-block bg-gray-900 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl text-center">
+                <h2 className="text-gray-100 dark:text-white text-lg mb-4">
                   Access all these resources from anywhere, anytime
                 </h2>
-                <Button size="lg" className="mt-2">
-                  Explore Resources
-                </Button>
+                <Button className="mt-2">Explore Resources</Button>
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="border-t border-[0.5px] border-secondary">
-          <div className="max-w-7xl mx-auto px-6 py-20">
-            <div>
-              <p className="text-muted text-center">
-                Join hundreds of institutions transforming education with VamVam
-                Uniport
-              </p>
-              <div className="flex items-center justify-center gap-4 mt-8">
-                <div className="text-center">
-                  <h1 className="text-primary-400 text-5xl font-medium mb-1">
-                    500+
-                  </h1>
-                  <p className="text-muted">Institutions worldwide</p>
-                </div>
-                <div className="text-center">
-                  <h1 className="text-primary-400 text-5xl font-medium mb-1">
-                    1M+
-                  </h1>
-                  <p className="text-muted">Students daily</p>
-                </div>
-                <div className="text-center">
-                  <h1 className="text-primary-400 text-5xl font-medium mb-1">
-                    98%
-                  </h1>
-                  <p className="text-muted">Satisfaction rate</p>
-                </div>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-              {[
-                {
-                  initials: "B",
-                  title: "BIAKA",
-                },
-                {
-                  initials: "H",
-                  title: "HIMS",
-                },
-                {
-                  initials: "S",
-                  title: "ST LOUIS",
-                },
-                {
-                  initials: "D",
-                  title: "DEX",
-                },
-                {
-                  initials: "D",
-                  title: "DAJA",
-                },
-                {
-                  initials: "G",
-                  title: "GRACIOUS",
-                },
-                {
-                  initials: "B",
-                  title: "BAPTIST SCHOOL",
-                },
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-center bg-white rounded-2xl p-5 hover:bg-primary-50 hover:scale-115 transition-transform duration-300 cursor-pointer"
-                >
-                  <div>
-                    <div className="flex items-center justify-center py-2.5  rounded-full bg-primary-400 mb-3 text-lg text-white font-semibold ">
-                      {item.initials}
-                    </div>
-                    <p className="text-muted text-lg">{item.title}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="text-muted mt-5 text-center">
-              From primary schools to universities across Cameroon, Nigeria, and
-              beyond
             </div>
           </div>
         </div>
       </section>
-      <section>
+      <section className="py-20 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800 relative overflow-hidden">
+        <AnimatedBackground variant="waves" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-[0.5px] border-secondary">
+            <div className="max-w-7xl mx-auto px-6 py-20">
+              <div>
+                <p className="text-secondary-200 text-center">
+                  Join hundreds of institutions transforming education with
+                  VamVam Uniport
+                </p>
+                <div className="flex items-center justify-center gap-4 mt-8">
+                  <div className="text-center">
+                    <h1 className="text-5xl bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent mb-2">
+                      500+
+                    </h1>
+                    <p className="text-secondary-200">Institutions worldwide</p>
+                  </div>
+                  <div className="text-center">
+                    <h1 className="text-5xl bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent mb-2">
+                      1M+
+                    </h1>
+                    <p className="text-secondary-200">Students daily</p>
+                  </div>
+                  <div className="text-center">
+                    <h1 className="text-5xl bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent mb-2">
+                      98%
+                    </h1>
+                    <p className="text-secondary-200">Satisfaction rate</p>
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+                {[
+                  {
+                    initials: "B",
+                    title: "BIAKA",
+                  },
+                  {
+                    initials: "H",
+                    title: "HIMS",
+                  },
+                  {
+                    initials: "S",
+                    title: "ST LOUIS",
+                  },
+                  {
+                    initials: "D",
+                    title: "DEX",
+                  },
+                  {
+                    initials: "D",
+                    title: "DAJA",
+                  },
+                  {
+                    initials: "G",
+                    title: "GRACIOUS",
+                  },
+                  {
+                    initials: "B",
+                    title: "BAPTIST SCHOOL",
+                  },
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-center p-6 bg-gray-50 rounded-2xl hover:bg-gradient-to-br hover:from-yellow-50 hover:to-yellow-100 transition-all group cursor-pointer"
+                  >
+                    <div>
+                      <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-primary-600 to-primary-500 rounded-full flex items-center justify-center text-white text-xl">
+                        {item.initials}
+                      </div>
+                      <p className="text-secondary-200 text-lg  group-hover:text-primary-600 transition-colors font-medium">
+                        {item.title}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="text-secondary-200 mt-5 text-center">
+                From primary schools to universities across Cameroon, Nigeria,
+                and beyond
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="py-20 bg-gradient-to-br from-primary-50 to-white dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 py-20">
-          <div className="mb-20">
-            <h1 className="text-center text-5xl mb-4">
+          <div className="mb-20 text-center">
+            <h1 className="text-4xl md:text-5xl mb-6 text-gray-900">
               Real Voices from Schools and Students
             </h1>
-            <p className="text-muted text-center">
+            <p className="text-secondary-200 text-xl">
               See how VamVam Uniport is making a difference in education
             </p>
           </div>
@@ -963,13 +748,13 @@ const HomePage = () => {
               <div className="inline-flex justify-center items-center bg-white rounded-full p-2">
                 <button
                   onClick={() => setActiveTabTestimony("school")}
-                  className={`font-medium px-8 py-3 ${activeTabTestimony === "school" ? "bg-primary-gradient rounded-full" : "text-muted"}`}
+                  className={`font-medium px-8 py-3 ${activeTabTestimony === "school" ? "px-8 py-3 rounded-full transition-all bg-gradient-to-r from-primary-600 to-primary-500 text-black" : "text-secondary-200"}`}
                 >
                   School & Administrators
                 </button>
                 <button
                   onClick={() => setActiveTabTestimony("student")}
-                  className={`font-medium px-8 py-3 ${activeTabTestimony === "student" ? "bg-primary-gradient rounded-full" : "text-muted"}`}
+                  className={`font-medium px-8 py-3 ${activeTabTestimony === "student" ? "px-8 py-3 rounded-full transition-all bg-gradient-to-r from-primary-600 to-primary-500 text-black" : "text-secondary-200"}`}
                 >
                   Student
                 </button>
@@ -1006,17 +791,17 @@ const HomePage = () => {
                       className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
                       key={index}
                     >
-                      <Quote size={48} className="text-primary-200" />
+                      <Quote size={48} className="text-primary-500" />
                       <div className="flex gap-1 my-4">
                         {[1, 2, 3, 4, 5].map((i) => (
                           <Star
                             key={i}
                             className={`${
                               i <= Math.floor(item.rating)
-                                ? "fill-yellow-400 text-yellow-400"
+                                ? "fill-primary-500 text-primary-500"
                                 : i === Math.ceil(item.rating) &&
                                     item.rating % 1 !== 0
-                                  ? "fill-yellow-400/50 text-yellow-400"
+                                  ? "fill-primary-500/50 text-primary-500"
                                   : "fill-gray-200 text-gray-200"
                             }`}
                             size={20}
@@ -1024,20 +809,22 @@ const HomePage = () => {
                         ))}
                       </div>
 
-                      <p className="text-secondary italic text-md mb-6">
+                      <p className="text-secondary-100 leading-relaxed italic text-md mb-6">
                         "{item.desc}"
                       </p>
 
-                      <div className="h-[0.4px] w-full bg-primary my-4"></div>
+                      <div className="h-[0.4px] w-full bg-gray-100 my-4"></div>
 
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold">
                           {item.name.charAt(0)}
                         </div>
                         <div>
-                          <p>{item.name}</p>
-                          <p className="text-sm text-muted">{item.title}</p>
-                          <p className="text-sm text-primary-500 font-medium">
+                          <p className="text-gray-900">{item.name}</p>
+                          <p className="text-sm text-secondary-200">
+                            {item.title}
+                          </p>
+                          <p className="text-sm text-primary-600 font-medium">
                             {item.institution}
                           </p>
                         </div>
@@ -1054,28 +841,30 @@ const HomePage = () => {
                 <h1 className="text-white text-3xl font-medium mb-4">
                   Watch Success Stories
                 </h1>
-                <p className="text-primary">
+                <p className="text-secondary-200">
                   Hear directly from educators and students about how VamVam
                   Uniport has transformed their educational experience.
                 </p>
                 <div className="flex items-center gap-4 mt-8">
                   <div className="text-center">
-                    <h1 className="text-primary-400 text-4xl font-medium mb-1">
+                    <h1 className="text-primary-500 text-4xl font-medium mb-1">
                       500+
                     </h1>
-                    <p className="text-secondary text-sm">Institutions</p>
+                    <p className="text-secondary-100 text-sm">Institutions</p>
                   </div>
                   <div className="text-center">
-                    <h1 className="text-primary-400 text-4xl font-medium mb-1">
+                    <h1 className="text-primary-500 text-4xl font-medium mb-1">
                       1M+
                     </h1>
-                    <p className="text-secondary text-sm">Students</p>
+                    <p className="text-secondary-100 text-sm">Students</p>
                   </div>
                   <div className="text-center">
-                    <h1 className="text-primary-400 text-4xl font-medium mb-1">
+                    <h1 className="text-primary-500 text-4xl font-medium mb-1">
                       98%
                     </h1>
-                    <p className="text-secondary text-sm">Engagement Boost </p>
+                    <p className="text-secondary-100 text-sm">
+                      Engagement Boost{" "}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -1103,7 +892,7 @@ const HomePage = () => {
             <h1 className="text-white text-5xl font-medium mb-5">
               Ready to Bring VamVam Uniport to Your Institution?
             </h1>
-            <h4 className="text-secondary text-lg md:mx-30">
+            <h4 className="text-secondary-100 text-lg md:max-w-2xl mx-auto">
               Get in touch with our team to learn how VamVam Uniport can
               transform your educational experience
             </h4>
@@ -1118,7 +907,7 @@ const HomePage = () => {
                 />
               </div>
               <h2 className="font-medium text-3xl">Chat with us on WhatsApp</h2>
-              <h4 className="text-muted text-xl md:max-w-2xl mx-auto">
+              <h4 className="text-secondary-200 text-xl md:max-w-2xl mx-auto">
                 Get instant responses to your questions and learn more about
                 VamVam Uniport
               </h4>
@@ -1133,36 +922,59 @@ const HomePage = () => {
                   type: "Phone",
                   title: "+237 xxx xxx xxx",
                   description: "Mon-Fri 6AM-6PM. WAT",
+                  bg: "bg-white dark:bg-gray-800",
+                  iconColor: "text-green-500",
+                  iconBg: "bg-green-100 dark:bg-green-900/30 ",
                 },
                 {
                   icon: Mail,
                   type: "Email",
                   title: "sale@nishangSystems.org",
                   description: "we respond within 24 hours on business days",
+                  bg: "bg-white dark:bg-gray-800",
+                  iconColor: "text-blue-600 dark:text-blue-400",
+                  iconBg: "bg-blue-100 dark:bg-blue-900/30 ",
                 },
                 {
                   icon: MapPin,
                   type: "Office",
                   title: "Bunduma, Buea, Cameroon",
                   description: "Visit us during business hours",
+                  bg: "bg-white dark:bg-gray-800",
+                  iconColor: " text-yellow-600 dark:text-yellow-400",
+                  iconBg: "bg-yellow-100 dark:bg-yellow-900/30",
                 },
                 {
                   icon: MessageCircle,
                   type: "WhatsApp",
                   description: "Chat with us now",
                   desc2: "Instant responses",
+                  bg: "bg-gradient-to-br from-green-500 to-green-600",
+                  iconColor: "text-white",
+                  iconBg: "bg-white/20 backdrop-blur-sm ",
                 },
               ].map((contact, index) => (
                 <div
                   key={index}
-                  className="bg-card-bg-light rounded-xl p-8 mt-12 text-center space-y-2"
+                  className={`bg-card-bg-light rounded-xl p-8 mt-12 text-center space-y-2 ${contact.bg}`}
                 >
-                  <div className="flex justify-center">
-                    <contact.icon className="text-primary-400" size={40} />
+                  <div
+                    className={`inline-flex p-4 rounded-2xl justify-center ${contact.iconBg}`}
+                  >
+                    <contact.icon
+                      className={`${contact.iconColor}`}
+                      size={40}
+                    />
                   </div>
-                  <h2 className="font-medium text-2xl text-white">{contact.type}</h2>
-                  <h2 className="font-medium text-muted">{contact.title}</h2>
-                  <p className="text-muted text-xs">{contact.description}</p>
+                  <h2 className="font-medium text-xl text-white">
+                    {contact.type}
+                  </h2>
+                  <h2 className="font-medium text-secondary-100 ">
+                    {contact.title}
+                  </h2>
+                  <p className="text-secondary-100 text-xs">
+                    {contact.description}
+                  </p>
                   {contact.desc2 && (
                     <p className="text-primary-400 text-xs font-medium">
                       {contact.desc2}
