@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   pull_request:
     branches:
-      - 'main' # or your default branch
+      - 'production' # or your default branch
       - 'develop'
 
 permissions:
