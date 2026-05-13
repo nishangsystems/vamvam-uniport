@@ -1,0 +1,100 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - 'main'
+
+permissions:
+  contents: write
+
+jobs:
+  vite-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Copy Environment Variables
+        run: cp .env.prod .env
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v2
+        with:
+          node-version: '24.12.2' # specify your node version
+
+      - name: Install Yarn
+        run: npm install --global yarn
+
+      - name: Install  dependencies
+        run: yarn install
+
+      - name: Ensure Project Builds
+        env:
+          CI: false # Unset CI to prevent warnings as errors
+        run: npm run build  --verbose # assuming this is your build script
+
+      - name: Archive staging artifacts
+        run: zip -r vamvamuniport.zip ./dist
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: vamvamuniport
+          path: ./vamvamuniport.zip
+
+  deploy-to-server:
+    name: Deploy artifact to the dev server
+    runs-on: ubuntu-latest
+    needs: vite-build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download app build
+        uses: actions/download-artifact@v4
+        with:
+          name: vamvamuniport
+
+      - name: Unzip contents
+        run: unzip vamvamuniport.zip
+
+      - name: rename extracted folder
+        run: mv dist vamvamuniport
+
+
+      - name: Upload artifact to the server
+        run: |
+         mkdir -p ~/.ssh
+         echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+         chmod 600 ~/.ssh/id_rsa
+    
+         scp -r -o StrictHostKeyChecking=no ./vamvamuniport/ ${{ secrets.SSH_PROD_USERNAME }}@${{ secrets.SSH_PROD_HOST }}:/var/www/html/
+
+      - name: Make notify.sh executable
+        run: chmod +x notify.sh
+
+      - name: Notify Discord
+        run: bash notify.sh pass "${{ secrets.WEBHOOK_URL }}" "production"
+  #
+  notify_on_failure:
+    runs-on: ubuntu-latest
+    needs: deploy-to-server
+    if: ${{ failure() || cancelled() }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Make notify.sh executable
+        run: chmod +x notify.sh
+
+      - name: Notify Discord
+        run: bash notify.sh fail "${{ secrets.WEBHOOK_URL }}" "production"
+#      - name: Push Release
+#        uses: ncipollo/release-action@v1
+#        with:
+#          artifacts: "./artifacts.zip"
+#          tag: ${{ github.run_number }}
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          name: "Release ${{ github.run_number }}"
+#          body: "Release for PR: ${{ github.event.pull_request.title }}"
