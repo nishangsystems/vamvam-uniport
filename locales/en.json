@@ -1,0 +1,433 @@
+{
+  "brand": {
+    "name": "VamVam Uniport"
+  },
+  "header": {
+    "nav": {
+      "product": "Product",
+      "solutions": "Solutions",
+      "resources": "Resources",
+      "about": "About VamVam Uniport",
+      "contact": "Contact"
+    },
+    "language": {
+      "en": "EN",
+      "fr": "FR"
+    }
+  },
+  "footer": {
+    "product": "Product",
+    "features": "Features",
+    "solutions": "Solutions",
+    "pricing": "Pricing",
+    "security": "Security",
+    "forSchools": "For Schools",
+    "forStudents": "For Students",
+    "forInstitutions": "For Institutions",
+    "forUniversities": "For Universities",
+    "blogs": "Blogs",
+    "helpCenter": "Help Center",
+    "guides": "Guides",
+    "webinars": "Webinars",
+    "company": "Company",
+    "careers": "Careers",
+    "partners": "Partners",
+    "legal": "Legal",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "compliance": "Compliance",
+    "cookiesPolicy": "Cookies Policy",
+    "download": "Download VamVam Uniport",
+    "copyright": "© 2026 Nishang Systems. All rights reserved.",
+    "googlePlay": "Get it on Google Play",
+    "appStore": "Download on the App Store"
+  },
+  "dashboard": {
+    "title": "Real-Time Dashboard Analytics",
+    "subtitle": "Monitor your institution's performance at a glance with live data visualization",
+    "stats": {
+      "students": "Total Students",
+      "revenue": "Total Revenue",
+      "courses": "Active Courses",
+      "payments": "Pending Payments"
+    },
+    "liveDemo": "Live Data (Demo Mode)",
+    "performance": {
+      "title": "Performance tracking",
+      "desc": "Monitor key metrics and trends in real-time"
+    },
+    "students": {
+      "title": "Student Insights",
+      "desc": "Track enrollment, attendance, and engagement"
+    },
+    "finance": {
+      "title": "Financial Overview",
+      "desc": "Complete visibility into revenue and payments"
+    }
+  },
+  "features": {
+    "title": "Powerful Features for Modern Education",
+    "subtitle": "Everything you need to run your institution smoothly, all in one platform",
+    "multiCampus": {
+      "title": "Multi-Campus Support",
+      "desc": "Works for schools that have more than one campus, all under one system"
+    },
+    "admission": {
+      "title": "Online Admission and Registration",
+      "desc": "Students can apply and register online without physical lines."
+    },
+    "records": {
+      "title": "Students Records & Academic Progress",
+      "desc": "Teachers and Administrators can record grades, track GPA and manage transcripts in one place"
+    },
+    "mobile": {
+      "title": "Mobile App for Students",
+      "desc": "Students can login, see their grades, announcements, class schedule and more from their phones."
+    },
+    "finance": {
+      "title": "Financial Management",
+      "desc": "School can track fees, payments, and generate financial reports"
+    },
+    "dashboard": {
+      "title": "Dashboard for Everyone",
+      "desc": "Separate dashboards for students, teachers, parents, finance staff and administrators"
+    },
+    "cta": "Get Started with VamVam Uniport",
+    "ready": "Ready to transform your institution?"
+  },
+  "platform": {
+    "title": "Flexible Access – Web, Mobile, Online & On-Premise",
+    "subtitle": "VamVam Uniport adapts to your needs with multiple access options and deployment flexibility",
+    "deploymentTitle": "Flexible Deployment Options",
+    "deploymentDesc": "VamVam Uniport is built to work in any environment, giving you complete control over how and where your data is stored.",
+    "cloud": "Cloud",
+    "server": "Server",
+    "online": {
+      "title": "Online (Cloud)",
+      "desc": "Full access with automatic updates and highest performance. Perfect for institutions with reliable internet."
+    },
+    "onPremise": {
+      "title": "On-Premise",
+      "desc": "Full control over your data with local hosting. Perfect for institutions requiring maximum security."
+    },
+    "sync": {
+      "title": "Seamless Synchronization",
+      "desc": "Data automatically syncs between your Online and On-Premise servers whenever internet is available",
+      "offline": "Work fully offline when needed",
+      "ownership": "Complete data ownership",
+      "autoSync": "Automatic two-way sync",
+      "onlineSync": "Sync when online"
+    }
+  },
+  "preview": {
+    "title": "See VamVam Uniport in Action",
+    "subtitle": "Experience the power of our financial reporting and management system",
+    "cards": {
+      "reports": {
+        "title": "Real-time Reports",
+        "desc": "Generate comprehensive financial reports instantly"
+      },
+      "security": {
+        "title": "Secure Access",
+        "desc": "Role-based permissions for administrators and staff"
+      },
+      "multiCampus": {
+        "title": "Multi-Campus",
+        "desc": "Manage multiple campuses from a single dashboard"
+      }
+    }
+  },
+
+  "home": {
+    "hero": {
+      "title": "Connect, Learn, and Grow Together with VamVam Uniport",
+      "subtitle": "The all-in-one platform that makes education engaging, seamless, and effective for schools, teachers, and students. Real-time collaboration, interactive tools, and powerful insights — all in one place.",
+      "download": "Download",
+      "demo": "Watch 2-Min Demo",
+      "trusted": "Trusted by leading institutions",
+      "ctaButton": "Mobile & Web Ready"
+    },
+    "about": {
+      "title": "What is VamVam Uniport?",
+      "description": "VamVam Uniport is a complete school management system designed to solve the common challenges institutions face with manual processes, scattered records, and inefficient communication.",
+      "features": {
+        "centralized": {
+          "title": "Centralized Platform",
+          "desc": "Manage student data, admissions, results, and payments all in one secure platform — no more scattered systems or paperwork."
+        },
+        "efficiency": {
+          "title": "Efficient Operations",
+          "desc": "Reduce errors and delays with automated processes that help schools operate more efficiently and deliver better experiences."
+        },
+        "accessibility": {
+          "title": "Always Accessible",
+          "desc": "Available on web and mobile, ensuring staff and students can access what they need, whenever they need it."
+        },
+        "solution": {
+          "title": "Complete Solution",
+          "desc": "From admissions to academics, finance to communication — VamVam Uniport brings everything together in one powerful platform."
+        }
+      },
+      "videoTitle": "Watch VamVam Uniport in Action",
+      "videoSubtitle": "2 minute overview"
+    },
+    "accountTypes": {
+      "title": "Built for Everyone Four Powerful Account Types",
+      "subtitle": "VamVam Uniport provides a dedicated, role-specific experience for every member of the education ecosystem",
+      "student": {
+        "title": "Student Account",
+        "subtitle": "Learning made engaging and organized",
+        "features": [
+          "Pay Fees Online",
+          "Register and or Pay Resit fees online",
+          "Access CA & Exams Marks Online",
+          "Sign courses and Download Form B online",
+          "View Fees Payments History Online",
+          "Choose placement Site online",
+          "View Courses failed / Unvalidated courses online",
+          "Apply & pay for transcript Delivery Online",
+          "Receive class, departmental & Course notification through the app"
+        ]
+      },
+      "parent": {
+        "title": "Parent Account"
+      },
+      "teacher": {
+        "title": "Teacher Account",
+        "subtitle": "VamVam Uniport provides a dedicated, role-specific experience for every member of the education ecosystem",
+        "features": [
+          "Access HOD Center as head of Department if you are assigned role",
+          "Allocate courses and lecturers in a program if you are HOD",
+          "View all programs & class list for all programs in your department",
+          "View course coverage reports as HOD",
+          "Edit student CA Marks as HOD",
+          "View course list and Class list for courses you are teaching",
+          "Take and View students attendance reports",
+          "Send course notification as lecturer and Departmental Notification as HOD through the App"
+        ]
+      },
+      "admin": {
+        "title": "Admin Account"
+      }
+    },
+    "solutions": {
+      "title": "Complete Solutions for Every Need",
+      "subtitle": "VamVam Uniport brings the entire university or school system into one digital platform",
+      "bottomLineTitle": "Bottom Line",
+      "bottomLine": "VamVam Uniport is solving one big problem: bringing the entire university or school system into one digital platform.",
+      "items": [
+        {
+          "title": "Student Management Solutions",
+          "subtitle": "These focus on helping students access everything easily:",
+          "features": [
+            "View results and grades instantly",
+            "Course registration directly on the platform",
+            "Timetables and schedules in one place",
+            "Personal student dashboard (academic tracking)"
+          ],
+          "problemSolved": "Removes paperwork, long queues, and confusion about courses or results."
+        },
+        {
+          "title": "Teaching & Academic Delivery Solutions",
+          "subtitle": "For lecturers and academic staff:",
+          "features": [
+            "Upload lecture notes and materials",
+            "Share assignments digitally",
+            "Manage class lists and grading easily"
+          ],
+          "problemSolved": "No more manual distribution of materials or scattered communication."
+        },
+        {
+          "title": "Parent/Guardian Access Solutions",
+          "subtitle": "Keep parents connected and informed:",
+          "features": [
+            "Parents can track student performance",
+            "View detailed reports and progress"
+          ],
+          "problemSolved": "Keeps parents informed without needing to visit the school."
+        },
+        {
+          "title": "Teaching & Academic Delivery Solutions",
+          "subtitle": "For lecturers and academic staff:",
+          "features": [
+            "Upload lecture notes and materials",
+            "Share assignments digitally",
+            "Manage class lists and grading easily"
+          ],
+          "problemSolved": "No more manual distribution of materials or scattered communication."
+        },
+        {
+          "title": "Communication & Notification System",
+          "subtitle": "Real-time institutional communication:",
+          "features": [
+            "In-app notifications",
+            "Announcements to students and staff",
+            "Real-time updates"
+          ],
+          "problemSolved": "Eliminates communication gaps in institutions."
+        },
+        {
+          "title": "Academic Administration Solutions",
+          "subtitle": "From broader system capabilities:",
+          "features": [
+            "Admission and application processing",
+            "Multi-campus or multi-department management",
+            "Student records and transcripts"
+          ],
+          "problemSolved": "Centralizes all school operations in one system."
+        },
+        {
+          "title": "Financial & Payment Integration",
+          "subtitle": "If enabled in deployment:",
+          "features": ["Online fee payments", "Financial tracking"],
+          "problemSolved": "Reduces manual payment handling and improves accountability."
+        },
+        {
+          "title": "Centralized School Ecosystem",
+          "subtitle": "Everything is connected:",
+          "features": ["Students", "Lecturers", "Admin", "Parents"],
+          "problemSolved": "Removes fragmentation (WhatsApp + paper + Excel + notice boards)."
+        }
+      ]
+    },
+    "resources": {
+      "title": "Comprehensive Resource Library",
+      "subtitle": "Everything your institution needs, organized and accessible",
+      "cta": "Explore Resources",
+      "access": "Access all these resources from anywhere, anytime",
+      "items": [
+        {
+          "icon": "SquareUserRound",
+          "title": "Student Information Resources",
+          "subtitle": "Comprehensive student data:",
+          "features": [
+            "Student profiles",
+            "Academic History (results, GPA, transcripts)",
+            "Course registration records"
+          ],
+          "note": "These are data resources used by both students and admin."
+        },
+        {
+          "icon": "Users",
+          "title": "Staff & Lecturer Resources",
+          "subtitle": "Faculty management tools:",
+          "features": [
+            "Lecturer profiles",
+            "Teaching schedules",
+            "Course allocations",
+            "Uploaded teaching materials"
+          ],
+          "note": "Helps manage who teaches what and when."
+        },
+        {
+          "icon": "Building",
+          "title": "Administrative Resources",
+          "subtitle": "Institutional management:",
+          "features": [
+            "Admission records",
+            "Department and faculty data",
+            "Academic calendars",
+            "Class lists"
+          ],
+          "note": "Used by school management to run operations."
+        },
+        {
+          "icon": "MessageSquare",
+          "title": "Communication Resources",
+          "subtitle": "Stay connected in real-time:",
+          "features": [
+            "Announcements",
+            "Notifications",
+            "Messages between users"
+          ],
+          "note": "Keep everyone informed in real time."
+        },
+        {
+          "icon": "Wallet",
+          "title": "Financial Resources",
+          "subtitle": "If enabled:",
+          "features": ["Payment records", "Fee structures", "Receipts"],
+          "note": "Supports financial tracking and transparency."
+        },
+        {
+          "icon": "Database",
+          "title": "System Resources",
+          "subtitle": "Backend Infrastructure:",
+          "features": [
+            "Database for all users and activities",
+            "Access Roles (student, lecturer, admin, parent)",
+            "Permissions and security settings"
+          ],
+          "note": "These are what keeps the system running smoothly."
+        }
+      ]
+    },
+    "trusted": {
+      "title": "Trusted by Leading Educational Institutions",
+      "subtitle": "Join hundreds of institutions transforming education with VamVam Uniport",
+      "institutions": "Institutions",
+      "students": "Students yearly",
+      "satisfaction": "Satisfaction rate"
+    },
+    "testimonials": {
+      "title": "Real Voices from Schools and Students",
+      "subtitle": "See how VamVam Uniport is making a difference in education",
+      "schoolTab": "School & Administrators",
+      "studentTab": "Student",
+      "videoTitle": "Watch Success Stories",
+      "videoDesc": "Hear directly from educators and students about how VamVam Uniport has transformed their educational experience.",
+      "items": [
+        {
+          "desc": "VamVam Uniport transformed how we deliver hybrid classes. Student engagement is up 40% and our administrative workload has been cut in half.",
+          "name": "Dr. Aisha Bello",
+          "title": "Principal",
+          "institution": "BIAKA University",
+          "rating": 5
+        },
+        {
+          "desc": "The analytics and reporting features give us insights we never had before. Decision-making is now data-driven and efficient.",
+          "name": "Prof. John Mensah",
+          "title": "Dean of Academics",
+          "institution": "HIMS College",
+          "rating": 3.5
+        },
+        {
+          "desc": "The on-premise deployment option was perfect for our rural campus. We can work offline and sync when connected.",
+          "name": "Sarah Kamara",
+          "title": "IT Director",
+          "institution": "ST LOUIS School",
+          "rating": 5
+        }
+      ]
+    },
+    "contact": {
+      "title": "Ready to Bring VamVam Uniport to Your Institution?",
+      "subtitle": "Get in touch with our team to learn how VamVam Uniport can transform your educational experience",
+      "whatsappTitle": "Chat with us on WhatsApp",
+      "whatsappDesc": "Get instant responses to your questions and learn more about VamVam Uniport",
+      "button": "Start WhatsApp Chat",
+      "phone": "Phone",
+      "email": "Email",
+      "office": "Office",
+      "whatsapp": "WhatsApp",
+      "cards": {
+        "phone": {
+          "type": "Phone",
+          "description": "Mon-Fri 6AM-6PM. WAT"
+        },
+        "email": {
+          "type": "Email",
+          "description": "We respond within 24 hours on business days"
+        },
+        "office": {
+          "type": "Office",
+          "description": "Visit us during business hours"
+        },
+        "whatsapp": {
+          "description": "Chat with us now",
+          "desc2": "Instant responses"
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+/* @import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -23,4 +23,362 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+
+
+    --color-primary-50: oklch(98.7% 0.026 102.212);
+    --color-primary-100: oklch(97.3% 0.071 103.193);
+    --color-primary-200: oklch(94.5% 0.129 101.54);
+    --color-primary-300: oklch(90.5% 0.182 98.111);
+    --color-primary-400: oklch(85.2% 0.199 91.936);
+    --color-primary-500: oklch(79.5% 0.184 86.047);
+    --color-primary-600: oklch(68.1% 0.162 75.834);
+
+  --color-success: oklch(72.3% 0.219 149.579);
+
+  /* Icons */
+  --color-icon-gold: oklch(68.1% 0.162 75.834);
+  --color-icon-dark: #111827;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(
+    90deg,
+    var(--color-primary-600) 0%,
+    var(--color-primary-400) 70%,
+    var(--color-primary-300) 100%
+  );
+
+}
+
+.dark {
+  
+}
+
+@theme {
+  /* Colors mapping */
+  --color-primary-50: var(--color-primary-200);
+  --color-primary-100: var(--color-primary-300);
+  --color-primary-200: var(--color-primary-200);
+  --color-primary-300: var(--color-primary-300);
+  --color-primary-400: var(--color-primary-400);
+  --color-primary-500: var(--color-primary-500);
+  --color-primary-600: var(--color-primary-600);
+  --color-secondary: var(--color-secondary);
+
+  --color-success: var(--color-success);
+
+
+  --color-icon-gold: var(--color-icon-gold);
+  --color-icon-dark: var(--color-icon-dark);
+
+  /* Animations */
+  --animate-grid-line-1: grid-line-1 12s linear infinite;
+  --animate-grid-line-2: grid-line-2 18s linear infinite;
+  --animate-grid-line-3: grid-line-3 22s linear infinite;
+  --animate-pulse-scale: pulse-scale 2s ease-in-out infinite;
+
+  --animate-fade-in-scale: fade-in-scale 0.7s ease-out;
+    --animate-grid-move: grid-move 25s linear infinite;
+--animate-wave-right: wave-right 25s linear infinite;
+--animate-wave-left: wave-left 25s linear infinite;
+--animate-particle-bounce: particle-bounce 264s ease-in-out infinite;
+--animate-grid-scroll: grid-scroll 76s linear infinite;
+
+}
+
+
+
+/* Grid animation lines */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInBottom {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes grid-line-1 {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes grid-line-2 {
+  0% { transform: translateY(-80%); }
+  100% { transform: translateY(120vh); }
+}
+
+@keyframes grid-line-3 {
+  0% { transform: translateY(-60%); }
+  100% { transform: translateY(140vh); }
+}
+
+/* Glow pulse */
+@keyframes pulse-scale {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.8);
+    opacity: 1;
+  }
+}
+
+
+/* UI animations */
+@keyframes fade-in-scale {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes floatDown {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(12px); }
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: -100; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes grid-move {
+  0% {
+    transform: translateY(-60px);
+  }
+  100% {
+    transform: translateY(60px);
+  }
+}
+
+@keyframes grid-scroll {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 120px 120px;
+  }
+}
+
+
+
+/* =========================
+   DRIFTING WAVES
+========================= */
+
+@keyframes wave-right {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes wave-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes orbFloat1 {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  25% {
+    transform: translate(40px, -30px) scale(1.08);
+  }
+
+  50% {
+    transform: translate(20px, 20px) scale(1.15);
+  }
+
+  75% {
+    transform: translate(-20px, -10px) scale(1.05);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes orbFloat2 {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  25% {
+    transform: translate(-30px, 20px) scale(1.04);
+  }
+
+  50% {
+    transform: translate(-10px, -30px) scale(1.12);
+  }
+
+  75% {
+    transform: translate(25px, 10px) scale(1.06);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+@keyframes particle-bounce {
+  0% {
+    transform: translateY(0vh) translateX(0px);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  25% {
+    transform: translateY(-30vh) translateX(15px);
+  }
+
+  50% {
+    transform: translateY(-60vh) translateX(-10px);
+  }
+
+  75% {
+    transform: translateY(-30vh) translateX(20px);
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0vh) translateX(0px);
+    opacity: 0;
+  }
+}
+
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.7s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.7s ease-out forwards;
+}
+
+.animate-slide-in-bottom {
+  animation: slideInBottom 0.7s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.7s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.7s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+.animate-dash {
+  animation: dash 7s linear infinite;
+}
+
+.animate-fade-in-scale {
+  animation: fade-in-scale 0.7s ease-out forwards;
+}
+
+.animate-float1 {
+  animation: orbFloat1 14s ease-in-out infinite alternate;
+}
+
+.animate-float2 {
+  animation: orbFloat2 18s ease-in-out infinite alternate;
+}
+
+
+.animate-wave-right {
+  animation: wave-right 25s linear infinite;
+}
+
+.animate-wave-left {
+  animation: wave-left 25s linear infinite;
+}
+/* =========================
+   STAGGER SUPPORT
+========================= */
+.stagger-item:nth-child(1) { animation-delay: 0.1s; }
+.stagger-item:nth-child(2) { animation-delay: 0.2s; }
+.stagger-item:nth-child(3) { animation-delay: 0.3s; }
+.stagger-item:nth-child(4) { animation-delay: 0.4s; }
+.stagger-item:nth-child(5) { animation-delay: 0.5s; }
+.stagger-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* Prevent flicker on load */
+.animate-slide-in-left,
+.animate-slide-in-right,
+.animate-slide-in-bottom,
+.animate-scale-in,
+.animate-fade-in {
+  animation-fill-mode: forwards;
+}
+
+@layer components {
+  .typography {
+    p {
+      font-size: var(--text-base);
+      color: var(--color-muted);
+    }
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+  }
+}
+
+@utility bg-primary-gradient {
+  background: var(--gradient-primary);
+}
+
+html {
+  scroll-behavior: smooth;
 }
