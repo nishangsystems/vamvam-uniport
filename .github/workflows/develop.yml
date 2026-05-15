@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  vite-build:
+  nextjs-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -19,23 +19,51 @@ jobs:
         run: cp .env.stag .env
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '22.13.0' # specify your node version
+          node-version: '22.13.0'
 
       - name: Install Yarn
         run: npm install --global yarn
 
-      - name: Install  dependencies
+      - name: Install dependencies
         run: yarn install
 
       - name: Ensure Project Builds
         env:
-          CI: false # Unset CI to prevent warnings as errors
-        run: npm run build  --verbose # assuming this is your build script
+          CI: false
+        run: npm run build --verbose
 
-      - name: Archive staging artifacts
-        run: zip -r vamvamuniport.zip ./dist
+      - name: Archive staging artifacts for standalone Next.js
+        run: |
+          # Verify standalone build exists
+          if [ ! -d ".next/standalone" ]; then
+            echo "ERROR: standalone build not found. Make sure next.config.js has output: 'standalone'"
+            exit 1
+          fi
+          
+          # Prepare deployment package
+          mkdir deploy-package
+          
+          # Copy standalone server and dependencies
+          cp -r .next/standalone/* deploy-package/
+          
+          # Copy static assets
+          mkdir -p deploy-package/.next
+          cp -r .next/static deploy-package/.next/
+          
+          # Copy public folder if it exists
+          cp -r public deploy-package/ 2>/dev/null || true
+          
+          # Copy environment file
+          cp .env deploy-package/ 2>/dev/null || true
+          
+          # Create zip from deployment package
+          cd deploy-package
+          zip -r ../vamvamuniport.zip .
+          cd ..
+          
+          echo "✅ Deployment package created successfully"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -46,29 +74,39 @@ jobs:
   deploy-to-server:
     name: Deploy artifact to the dev server
     runs-on: ubuntu-latest
-    needs: vite-build
+    needs: nextjs-build
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Download app build
         uses: actions/download-artifact@v4
         with:
           name: vamvamuniport
 
+      - name: Create deployment directory
+        run: mkdir -p vamvamuniport
+
       - name: Unzip contents
-        run: unzip vamvamuniport.zip
+        run: unzip vamvamuniport.zip -d vamvamuniport/
 
-      - name: rename extracted folder
-        run: mv dist vamvamuniport
-
-      - name: Upload artifact to the server
+      - name: Upload and start Next.js on server
         run: |
-         mkdir -p ~/.ssh
-         echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
-         chmod 600 ~/.ssh/id_rsa
-    
-         scp -r -o StrictHostKeyChecking=no ./vamvamuniport/ ${{ secrets.SSH_DEV_USERNAME }}@${{ secrets.SSH_DEV_HOST }}:/var/www/html/
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          
+          # Copy files to server
+          scp -r -o StrictHostKeyChecking=no ./vamvamuniport/ ${{ secrets.SSH_DEV_USERNAME }}@${{ secrets.SSH_DEV_HOST }}:/var/www/html/
+          
+          # Start Next.js on server
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_DEV_USERNAME }}@${{ secrets.SSH_DEV_HOST }} << 'EOF'
+            cd /var/www/html/vamvamuniport
+            # Install production dependencies if needed
+            yarn install --production --frozen-lockfile 2>/dev/null || npm ci --production
+            # Stop existing process if running
+            pkill -f "node server.js" || true
+            # Start Next.js with node
+            nohup node server.js > app.log 2>&1 &
+            echo "Next.js app started with PID: $!"
+          EOF
 
       - name: Make notify.sh executable
         run: chmod +x notify.sh
@@ -82,18 +120,10 @@ jobs:
     if: ${{ failure() || cancelled() }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Make notify.sh executable
         run: chmod +x notify.sh
 
       - name: Notify Discord
         run: bash notify.sh fail "${{ secrets.WEBHOOK_URL }}" "staging"
-    #  - name: Push Release
-      #  uses: ncipollo/release-action@v1
-      #  with:
-        #  artifacts: "./artifacts.zip"
-#          tag: ${{ github.run_number }}
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          name: "Release ${{ github.run_number }}"
-#          body: "Release for PR: ${{ github.event.pull_request.title }}"
