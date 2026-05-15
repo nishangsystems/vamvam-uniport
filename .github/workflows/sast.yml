@@ -1,0 +1,36 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - 'production' # or your default branch
+      - 'develop'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Copy Environment Variables
+        run: cp .env.stag .env
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22.13.0' # specify your node version
+
+      - name: Install Yarn
+        run: npm install --global yarn
+
+      - name: Install  dependencies
+        run: yarn install
+
+      - name: Ensure Project Builds
+        env:
+          CI: false # Unset CI to prevent warnings as errors
+        run: npm run build  --verbose # assuming this is your build script
