@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  vite-build:
+  next-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -60,7 +60,7 @@ jobs:
         run: unzip vamvamuniport.zip
 
       - name: rename extracted folder
-        run: mv dist vamvamuniport
+        run: mv out vamvamuniport
 
 
       - name: Upload artifact to the server
