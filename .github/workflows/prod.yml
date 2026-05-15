@@ -35,7 +35,7 @@ jobs:
         run: npm run build  --verbose # assuming this is your build script
 
       - name: Archive staging artifacts
-        run: zip -r vamvamuniport.zip ./dist
+        run: zip -r vamvamuniport.zip ./out
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
