@@ -42,6 +42,29 @@
     "googlePlay": "Disponible sur Google Play",
     "appStore": "Télécharger sur l’App Store"
   },
+  "contactModal": {
+    "title": "Demander une démo",
+    "success": {
+      "title": "Message envoyé avec succès !",
+      "message": "Nous vous répondrons dans les 24 heures."
+    },
+    "errors": {
+      "failed": "Échec de l'envoi du message",
+      "default": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "form": {
+      "name": "Nom complet",
+      "namePlaceholder": "Jean Dupont",
+      "email": "Adresse e-mail",
+      "emailPlaceholder": "jean@exemple.com",
+      "phone": "Numéro de téléphone (Optionnel)",
+      "phonePlaceholder": "+237 6XX XXX XXX",
+      "message": "Message",
+      "messagePlaceholder": "Je souhaite en savoir plus sur VamVam Uniport...",
+      "submit": "Envoyer le message",
+      "sending": "Envoi en cours..."
+    }
+  },
   "dashboard": {
     "title": "Tableau de bord analytique en temps réel",
     "subtitle": "Surveillez les performances de votre établissement grâce à une visualisation des données en direct",
@@ -167,7 +190,9 @@
         }
       },
       "videoTitle": "Découvrez VamVam Uniport en action",
-      "videoSubtitle": "Aperçu de 2 minutes"
+      "videoSubtitle": "Aperçu de 2 minutes",
+      "SeeHowItWorks": "Voir comment ça fonctionne",
+      "browserDoesNotSupport": "Votre navigateur ne gère pas l'élément vidéo"
     },
     "accountTypes": {
       "title": "Conçu pour tous les profils",
@@ -177,38 +202,60 @@
         "subtitle": "Apprentissage organisé et interactif",
         "features": [
           "Payer les frais en ligne",
-      "S'inscrire et/ou payer les frais de rattrapage en ligne",
-      "Accéder aux notes de contrôle continu et d'examens en ligne",
-      "Signer les cours et télécharger le formulaire B en ligne",
-      "Consulter l'historique des paiements en ligne",
-      "Choisir le site de stage en ligne",
-      "Consulter les cours échoués / non validés en ligne",
-      "Demander et payer la livraison de relevés de notes en ligne",
-      "Recevoir les notifications de classe, départementales et de cours via l'application"
+          "S'inscrire et/ou payer les frais de rattrapage en ligne",
+          "Accéder aux notes de contrôle continu et d'examens en ligne",
+          "Signer les cours et télécharger le formulaire B en ligne",
+          "Consulter l'historique des paiements en ligne",
+          "Choisir le site de stage en ligne",
+          "Consulter les cours échoués / non validés en ligne",
+          "Demander et payer la livraison de relevés de notes en ligne",
+          "Recevoir les notifications de classe, départementales et de cours via l'application"
         ]
       },
       "parent": {
-        "title": "Compte parent"
+        "title": "Compte parent",
+        "subtitle": "VamVam Uniport offre une expérience dédiée et spécifique à chaque rôle au sein de l'écosystème éducatif",
+        "features": [
+          "Restez connecté à l'éducation de votre enfant",
+          "Consultez l'emploi du temps et les présences de votre enfant",
+          "Suivez les performances académiques et les rapports de progression",
+          "Recevez des notifications en temps réel",
+          "Communiquez directement avec les enseignants et les administrateurs",
+          "Obtenez des informations sur le développement global de l'enfant"
+        ]
       },
       "teacher": {
         "title": "Compte enseignant",
-          "subtitle": "Apprentissage organisé et interactif",
+        "subtitle": "Apprentissage organisé et interactif",
         "features": [
-              "Accéder au centre HOD en tant que chef de département si le rôle vous est attribué",
-      "Attribuer des cours et des enseignants dans un programme si vous êtes HOD",
-      "Voir tous les programmes et la liste des classes pour tous les programmes de votre département",
-      "Consulter les rapports de couverture des cours en tant que HOD",
-      "Modifier les notes de contrôle continu des étudiants en tant que HOD",
-      "Consulter la liste des cours et la liste des classes pour les cours que vous enseignez",
-      "Prendre et consulter les rapports de présence des étudiants",
-      "Envoyer des notifications de cours en tant qu'enseignant et des notifications départementales en tant que HOD via l'application"
-
+          "Accéder au centre HOD en tant que chef de département si le rôle vous est attribué",
+          "Attribuer des cours et des enseignants dans un programme si vous êtes HOD",
+          "Voir tous les programmes et la liste des classes pour tous les programmes de votre département",
+          "Consulter les rapports de couverture des cours en tant que HOD",
+          "Modifier les notes de contrôle continu des étudiants en tant que HOD",
+          "Consulter la liste des cours et la liste des classes pour les cours que vous enseignez",
+          "Prendre et consulter les rapports de présence des étudiants",
+          "Envoyer des notifications de cours en tant qu'enseignant et des notifications départementales en tant que HOD via l'application"
         ]
-        
       },
       "admin": {
-        "title": "Compte administrateur"
-      }
+        "title": "Compte administrateur",
+        "subtitle": "VamVam Uniport offre une expérience dédiée et spécifique à chaque rôle au sein de l'écosystème éducatif",
+        "features": [
+          "Gérez votre établissement en toute confiance",
+          "Supervision complète de tous les utilisateurs, classes et départements",
+          "Analyses avancées et tableaux de bord institutionnels",
+          "Gérez le personnel, les inscriptions des étudiants et les autorisations",
+          "Traitez la facturation, la planification et l'allocation des ressources",
+          "Assurez la conformité et la sécurité des données sur toute la plateforme",
+          "Générez des rapports complets pour la prise de décision"
+        ]
+      },
+      "all_four_supported": "Les quatre types de comptes sont entièrement pris en charge à la fois sur",
+      "and": "et",
+      "deployments": "déploiements",
+      "on_premise": "Sur site",
+      "online_cloud": "Cloud en ligne"
     },
     "solutions": {
       "title": "Des solutions complètes pour chaque besoin",

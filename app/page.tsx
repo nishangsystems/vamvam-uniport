@@ -18,6 +18,7 @@ import {
   MapPin,
   MessageCircle,
   MessageSquare,
+  Pause,
   Phone,
   Play,
   Quote,
@@ -29,7 +30,7 @@ import {
   Video,
   Wallet,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SoftwarePreview from "../components/SoftwarePreview";
 import DashboardDemo from "../components/DashboardDemo";
 import Features from "../components/Features";
@@ -38,9 +39,11 @@ import appImage from "../assets/app-preview.png";
 import AnimatedBackground from "@/components/animations/background/AnimatedBackground";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
+import ContactFormModal from "@/components/ContactFormModal";
 
 const HomePage = () => {
   const { t } = useTranslation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [activeTab, setActiveTab] = useState<
     "student" | "parent" | "teacher" | "admin"
@@ -50,11 +53,32 @@ const HomePage = () => {
   >("school");
 
   // Get solutions items as array
-  const solutionsItems = t("home.solutions.items", { returnObjects: true }) as any[];
+  const solutionsItems = t("home.solutions.items", {
+    returnObjects: true,
+  }) as any[];
   // Get resources items as array
-  const resourcesItems = t("home.resources.items", { returnObjects: true }) as any[];
+  const resourcesItems = t("home.resources.items", {
+    returnObjects: true,
+  }) as any[];
   // Get testimonials items as array
-  const testimonialsItems = t("home.testimonials.items", { returnObjects: true }) as any[];
+  const testimonialsItems = t("home.testimonials.items", {
+    returnObjects: true,
+  }) as any[];
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggleVideoPlayback = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play();
+        setIsPlaying(true);
+      }
+    }
+  };
 
   return (
     <>
@@ -112,9 +136,6 @@ const HomePage = () => {
                       height={800}
                       className="rounded-md h-full w-full object-contain"
                     />
-                  </div>
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 animate-[bounce_8s_ease-in-out_infinite]">
-                    <Button size="lg">{t("home.hero.ctaButton")} </Button>
                   </div>
                 </div>
               </ScrollAnimation>
@@ -178,35 +199,54 @@ const HomePage = () => {
                 ))}
               </StaggeredAnimation>
               <div className="mt-12">
-                <Button>See How It Works</Button>
+                <Button onClick={() => setIsModalOpen(true)}>
+                  {" "}
+                  {t("home.about.SeeHowItWorks")}
+                </Button>
               </div>
             </div>
 
             <ScrollAnimation
-              animation="slide-right"
-              className="relative w-full max-w-2xl rounded-3xl overflow-hidden flex-1 aspect-video"
-            >
-              <video
-                controls
-                className="absolute inset-0 w-full h-full object-cover rounded-3xl"
-              >
-                <source src="/videos/my-video.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-              <div className="absolute inset-0 flex items-center justify-center z-10">
-                <div className="bg-white rounded-full w-16 h-16 md:w-24 md:h-24 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300">
-                  <Play className="text-primary-600 ml-1" size={44} />
-                </div>
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center text-white">
-                  <p className="text-2xl mb-2">{t("home.about.videoTitle")}</p>
-                  <p className="Watch VamVam Uniport in Action">
-                    {t("home.about.videoSubtitle")}
-                  </p>
-                </div>
-              </div>
-            </ScrollAnimation>
+  animation="slide-right"
+  className="relative w-full max-w-2xl rounded-3xl overflow-hidden flex-1 aspect-video group"
+>
+  <video
+    ref={videoRef}
+    controls={false}
+    className="absolute inset-0 w-full h-full object-cover rounded-3xl"
+    onPlay={() => setIsPlaying(true)}
+    onPause={() => setIsPlaying(false)}
+    onEnded={() => setIsPlaying(false)}
+  >
+    <source src="/videos/demo.mp4" type="video/mp4" />
+    {t("home.about.browserDoesNotSupport")}
+  </video>
+  
+  {/* Custom Play/Pause Button - appears on hover or always visible */}
+  <div 
+    className="absolute inset-0 flex items-center justify-center z-10 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+    onClick={toggleVideoPlayback}
+  >
+    <div className="bg-white rounded-full w-16 h-16 md:w-24 md:h-24 flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg">
+      {isPlaying ? (
+        <Pause className="text-primary-600 ml-0" size={44} />
+      ) : (
+        <Play className="text-primary-600 ml-1" size={44} />
+      )}
+    </div>
+  </div>
+  
+  {/* Optional: Video title overlay (shown when video is not playing) */}
+  {!isPlaying && (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div className="text-center text-white bg-black/50 p-4 rounded-lg backdrop-blur-sm">
+        <p className="text-2xl mb-2 font-bold">{t("home.about.videoTitle")}</p>
+        <p className="text-lg">{t("home.about.videoSubtitle")}</p>
+      </div>
+    </div>
+  )}
+</ScrollAnimation>
+
           </div>
         </div>
       </section>
@@ -247,29 +287,29 @@ const HomePage = () => {
             <div className="flex flex-wrap gap-3 justify-center">
               <button
                 onClick={() => setActiveTab("student")}
-                className={`inline-flex items-center gap-2 px-4 py-3 rounded-xl ${activeTab === "student" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"}`}
+                className={`inline-flex items-center gap-2 px-4 py-3 rounded-xl font-medium cursor-pointer  ${activeTab === "student" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"}`}
               >
                 <GraduationCap size={20} />{" "}
                 {t("home.accountTypes.student.title")}
               </button>
-               <button
+              <button
                 onClick={() => setActiveTab("teacher")}
-                className={`space-x-3 transition-all  text-black shadow-lg inline-flex items-center gap-2 px-4 py-3 rounded-2xl ${activeTab === "teacher" ? "bg-gradient-to-r from-green-500 to-green-600 text-white" : "bg-gray-200 text-gray-700"}`}
+                className={`space-x-3 transition-all  text-black shadow-lg inline-flex items-center gap-2 px-4 py-3 rounded-2xl  font-medium cursor-pointer ${activeTab === "teacher" ? "bg-gradient-to-r from-green-500 to-green-600 text-white" : "bg-gray-200 text-gray-700"}`}
               >
                 <UserCheck size={20} />
                 {t("home.accountTypes.teacher.title")}
               </button>
               <button
                 onClick={() => setActiveTab("parent")}
-                className={`inline-flex items-center gap-2 px-4 py-3 rounded-xl ${activeTab === "parent" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"}`}
+                className={`inline-flex items-center gap-2 px-4 py-3  rounded-2xl p-8 shadow-2xl font-medium cursor-pointer   ${activeTab === "parent" ? "bg-gradient-to-br from-purple-500 to-purple-600 text-white" : "bg-gray-200 text-gray-700"}`}
               >
                 <Users size={20} />
                 {t("home.accountTypes.parent.title")}
               </button>
-             
+
               <button
                 onClick={() => setActiveTab("admin")}
-                className={`inline-flex items-center gap-2 px-4 py-3 rounded-xl ${activeTab === "admin" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"}`}
+                className={`inline-flex items-center gap-2 px-4 py-3 rounded-2xl shadow-lg  transition-all font-medium cursor-pointer   ${activeTab === "admin" ? "bg-gradient-to-r from-primary-600 to-primary-500 text-white " : "bg-gray-200 text-gray-700"}`}
               >
                 <Building2 size={20} /> {t("home.accountTypes.admin.title")}
               </button>
@@ -330,15 +370,6 @@ const HomePage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex justify-center mt-20">
-                    <div className="inline-flex rounded-full bg-gray-50 px-8 py-2.5">
-                      All four account types are fully supported on both
-                      <span className="text-blue-500 mx-1">Online Cloud</span>
-                      and
-                      <span className="text-blue-500 mx-1">On-Premise</span>
-                      deployments
-                    </div>
-                  </div>
                 </div>
               )}
               {activeTab === "teacher" && (
@@ -396,23 +427,143 @@ const HomePage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex justify-center mt-20">
-                    <div className="inline-flex rounded-full bg-gray-50 px-8 py-2.5">
-                      All four account types are fully supported on both
-                      <span className="text-blue-500 mx-1">Online Cloud</span>
-                      and
-                      <span className="text-blue-500 mx-1">On-Premise</span>
-                      deployments
+                </div>
+              )}
+              {activeTab === "parent" && (
+                <div className=" mt-20">
+                  <div className="flex flex-wrap justify-between items-center">
+                    <div className="flex-1">
+                      <div className="inline-flex  bg-gradient-to-r from-purple-500 to-purple-600  p-4 rounded-xl mb-4">
+                        <Users size={40} />
+                      </div>
+                      <h2 className="text-3xl font-medium mb-4">
+                        {t("home.accountTypes.parent.title")}
+                      </h2>
+                      <p className="text-secondary-200 text-lg mb-8">
+                        {t("home.accountTypes.parent.subtitle")}
+                      </p>
+                      <div className="space-y-5">
+                        {(
+                          t("home.accountTypes.parent.features", {
+                            returnObjects: true,
+                          }) as string[]
+                        ).map((item, idx) => (
+                          <div key={idx} className="flex items-center gap-2">
+                            <CircleCheckBig className="text-blue-500" />
+                            <p className="text-secondary-200">{item}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <div className="bg-gradient-to-br from-purple-500 to-purple-600  rounded-3xl p-8 shadow-2xl ">
+                        <div className="rounded-xl bg-white p-4">
+                          <div className="flex items-center gap-2">
+                            <div className="inline-flex w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 p-4 rounded-full mb-4">
+                              <Users size={40} />
+                            </div>
+                            <div className="w-full space-y-0.5">
+                              <div className="h-3.5 w-[60%] bg-secondary rounded-xs"></div>
+                              <div className="h-2.5 w-[40%] bg-primary rounded-xs"></div>
+                            </div>
+                          </div>
+                          <div className="h-0.5 w-full bg-gray-300 my-3"></div>
+                          <div className="grid grid-cols-2 gap-3">
+                            {[1, 2, 3, 4].map((i) => (
+                              <div
+                                key={i}
+                                className="rounded-md bg-gray-50 p-3 animate-[bounce_8s_ease-in-out_infinite]"
+                              >
+                                <div className="rounded-md bg-gray-200 w-15 h-15 mb-2"></div>
+                                <div className="h-2.5 w-full bg-secondary rounded-sm mb-1"></div>
+                                <div className="h-1.5 w-full bg-primary rounded-sm"></div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
+              {activeTab === "admin" && (
+                <div className=" mt-20">
+                  <div className="flex flex-wrap justify-between items-center">
+                    <div className="flex-1">
+                      <div className="inline-flex bg-gradient-to-br from-primary-600 to-primary-500 rounded-2xl p-4 shadow-2xl mb-4">
+                        <Users size={40} />
+                      </div>
+                      <h2 className="text-3xl font-medium mb-4">
+                        {t("home.accountTypes.admin.title")}
+                      </h2>
+                      <p className="text-secondary-200 text-lg mb-8">
+                        {t("home.accountTypes.admin.subtitle")}
+                      </p>
+                      <div className="space-y-5">
+                        {(
+                          t("home.accountTypes.admin.features", {
+                            returnObjects: true,
+                          }) as string[]
+                        ).map((item, idx) => (
+                          <div key={idx} className="flex items-center gap-2">
+                            <CircleCheckBig className="text-blue-500" />
+                            <p className="text-secondary-200">{item}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <div className="bg-gradient-to-br  bg-gradient-to-br from-primary-600 to-primary-500  rounded-3xl p-8 shadow-2xl ">
+                        <div className="rounded-xl bg-white p-4">
+                          <div className="flex items-center gap-2">
+                            <div className="inline-flex  bg-gradient-to-br from-primary-600 to-primary-500  p-4 rounded-full mb-4">
+                              <Users size={40} />
+                            </div>
+                            <div className="w-full space-y-0.5">
+                              <div className="h-3.5 w-[60%] bg-secondary rounded-xs"></div>
+                              <div className="h-2.5 w-[40%] bg-primary rounded-xs"></div>
+                            </div>
+                          </div>
+                          <div className="h-0.5 w-full bg-gray-300 my-3"></div>
+                          <div className="grid grid-cols-2 gap-3">
+                            {[1, 2, 3, 4].map((i) => (
+                              <div
+                                key={i}
+                                className="rounded-md bg-gray-50 p-3 animate-[bounce_8s_ease-in-out_infinite]"
+                              >
+                                <div className="rounded-md bg-gray-200 w-15 h-15 mb-2"></div>
+                                <div className="h-2.5 w-full bg-secondary rounded-sm mb-1"></div>
+                                <div className="h-1.5 w-full bg-primary rounded-sm"></div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div className="flex justify-center mt-20">
+                <div className="inline-flex rounded-full bg-gray-50 px-8 py-2.5">
+                  {t("home.accountTypes.all_four_supported")}
+                  <span className="text-blue-500 mx-1">
+                    {" "}
+                    {t("home.accountTypes.on_premise")}
+                  </span>
+                  {t("home.accountTypes.and")}
+                  <span className="text-blue-500 mx-1">
+                    {" "}
+                    {t("home.accountTypes.online_cloud")}
+                  </span>
+                  {t("home.accountTypes.deployments")}
+                </div>
+              </div>
             </ScrollAnimation>
           </div>
         </div>
       </section>
 
-      <section  className="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div id="solutions" className="text-center mb-20">
             <h1 className="text-primary text-4xl md:text-5xl mb-4 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
@@ -446,7 +597,7 @@ const HomePage = () => {
                   <div className="h-full bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 dark:border-gray-700">
                     <div
                       className={`inline-block  flex items-center justify-center mb-6 bg-gradient-to-br ${isLeftCard ? " from-yellow-500 to-yellow-600" : "from-gray-700 to-gray-900 dark:from-gray-600 dark:to-gray-800"} rounded-2xl p-4 mb-4`}
-                    > 
+                    >
                       <SolutionIcon className="text-white" size={40} />
                     </div>
                     <div>
@@ -458,14 +609,16 @@ const HomePage = () => {
                       </p>
                     </div>
                     <div className="space-y-4 mb-4 text-primary">
-                      {solution.features.map((feature: string, fIdx: number) => (
-                        <div key={fIdx} className="flex items-center gap-2">
-                          <div className="w-1 h-1 rounded-full bg-primary-400"></div>
-                          <p className="text-gray-700 dark:text-gray-300">
-                            {feature}
-                          </p>
-                        </div>
-                      ))}
+                      {solution.features.map(
+                        (feature: string, fIdx: number) => (
+                          <div key={fIdx} className="flex items-center gap-2">
+                            <div className="w-1 h-1 rounded-full bg-primary-400"></div>
+                            <p className="text-gray-700 dark:text-gray-300">
+                              {feature}
+                            </p>
+                          </div>
+                        ),
+                      )}
                     </div>
                     <div className="h-px w-full bg-muted"></div>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mb-1 mt-4 ">
@@ -544,14 +697,16 @@ const HomePage = () => {
                         </p>
                       </div>
                       <div className="space-y-2 mb-4">
-                        {resource.features.map((feature: string, fIdx: number) => (
-                          <div key={fIdx} className="flex items-center gap-2">
-                            <div className="text-primary-600 mr-1.5 mt-0.5 text-xs"></div>
-                            <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start">
-                              {feature}
-                            </p>
-                          </div>
-                        ))}
+                        {resource.features.map(
+                          (feature: string, fIdx: number) => (
+                            <div key={fIdx} className="flex items-center gap-2">
+                              <div className="text-primary-600 mr-1.5 mt-0.5 text-xs"></div>
+                              <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start">
+                                {feature}
+                              </p>
+                            </div>
+                          ),
+                        )}
                       </div>
                       <div className="pt-3 border-t border-gray-200 dark:border-gray-700"></div>
                       <div className="h-px w-full bg-muted">
@@ -564,18 +719,18 @@ const HomePage = () => {
                 );
               })}
             </div>
-            <div className="flex justify-center items-center mt-20">
+            {/* <div className="flex justify-center items-center mt-20">
               <div className="inline-block bg-gray-900 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl text-center ">
                 <h2 className="text-gray-100 dark:text-white text-lg mb-4">
                   {t("home.resources.access")}
                 </h2>
                 <Button className="mt-2"> {t("home.resources.cta")}</Button>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
-      
+
       <section className="py-20 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800 relative overflow-hidden">
         <AnimatedBackground variant="waves" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -598,7 +753,7 @@ const HomePage = () => {
                 </div>
                 <div className="text-center">
                   <h1 className="text-5xl bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent mb-2">
-                    8000+
+                    20,000+
                   </h1>
                   <p className="text-gray-600">{t("home.trusted.students")}</p>
                 </div>
@@ -647,8 +802,8 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      
-      <section className="py-20 bg-gradient-to-br from-yellow-50 to-white dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
+
+      {/* <section className="py-20 bg-gradient-to-br from-yellow-50 to-white dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
         <AnimatedBackground variant="orbs" />
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="mb-20 text-center">
@@ -746,7 +901,7 @@ const HomePage = () => {
                   </div>
                   <div className="text-center">
                     <h1 className="text-primary-500 text-4xl font-medium mb-1">
-                      8000+
+                      20,000+
                     </h1>
                     <p className="text-sm text-gray-400">
                       {t("home.trusted.students")}
@@ -765,8 +920,9 @@ const HomePage = () => {
                   controls
                   className="absolute inset-0 w-full h-full object-cover rounded-3xl"
                 >
-                  <source src="/videos/my-video.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
+                  <source src="/videos/demo.mp4" type="video/mp4" />
+                                                  {t("home.about.browserDoesNotSupport.")}
+
                 </video>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="bg-white rounded-full w-16 h-16 md:w-24 md:h-24 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300">
@@ -777,8 +933,8 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </section>
-      
+      </section> */}
+
       <section
         id="contact"
         className="py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden"
@@ -816,7 +972,7 @@ const HomePage = () => {
                 {
                   icon: Phone,
                   type: t("home.contact.cards.phone.type"),
-                  title: "+237 xxx xxx xxx",
+                  title: "+237 679 135 426",
                   description: t("home.contact.cards.phone.description"),
                   bg: "bg-white dark:bg-gray-800",
                   iconColor: "text-green-500",
@@ -851,7 +1007,7 @@ const HomePage = () => {
                   bg: "bg-gradient-to-br from-green-500 to-green-600",
                   iconColor: "text-white",
                   iconBg: "bg-white/20 backdrop-blur-sm ",
-                  href: "https://wa.me/237XXXXXXXXX",
+                  href: "https://wa.me/237679135426",
                 },
               ].map((contact, index) => {
                 const isExternal =
@@ -894,6 +1050,11 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      <ContactFormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </>
   );
 };
