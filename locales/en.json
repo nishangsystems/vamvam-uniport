@@ -65,6 +65,29 @@
       "desc": "Complete visibility into revenue and payments"
     }
   },
+  "contactModal": {
+    "title": "Request a Demo",
+    "success": {
+      "title": "Message Sent Successfully!",
+      "message": "We'll get back to you within 24 hours."
+    },
+    "errors": {
+      "failed": "Failed to send message",
+      "default": "Something went wrong. Please try again."
+    },
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "John Doe",
+      "email": "Email Address",
+      "emailPlaceholder": "john@example.com",
+      "phone": "Phone Number (Optional)",
+      "phonePlaceholder": "+237 6XX XXX XXX",
+      "message": "Message",
+      "messagePlaceholder": "I'm interested in learning more about VamVam Uniport...",
+      "submit": "Send Message",
+      "sending": "Sending..."
+    }
+  },
   "features": {
     "title": "Powerful Features for Modern Education",
     "subtitle": "Everything you need to run your institution smoothly, all in one platform",
@@ -169,7 +192,9 @@
         }
       },
       "videoTitle": "Watch VamVam Uniport in Action",
-      "videoSubtitle": "2 minute overview"
+      "videoSubtitle": "2 minute overview",
+      "SeeHowItWorks": "See How It Works",
+      "browserDoesNotSupport": "Your browser does not support the video tag."
     },
     "accountTypes": {
       "title": "Built for Everyone Four Powerful Account Types",
@@ -190,7 +215,16 @@
         ]
       },
       "parent": {
-        "title": "Parent Account"
+        "title": "Parent Account",
+        "subtitle": "VamVam Uniport provides a dedicated, role-specific experience for every member of the education ecosystem",
+        "features": [
+          "Stay connected to your child's education",
+          "View child's class schedule and attendance",
+          "Monitor academic performance and progress reports",
+          "Receive real-time notifications",
+          "Communicate directly with teachers and administrators",
+          "Get insights into overall child development"
+        ]
       },
       "teacher": {
         "title": "Teacher Account",
@@ -207,8 +241,23 @@
         ]
       },
       "admin": {
-        "title": "Admin Account"
-      }
+        "title": "Admin Account",
+        "subtitle": "VamVam Uniport provides a dedicated, role-specific experience for every member of the education ecosystem",
+        "features": [
+          "Manage your institution with confidence",
+          "Full oversight of all users, classes, and departments",
+          "Advanced analytics and institutional dashboards",
+          "Manage staff, student enrollment, and permissions",
+          "Handle billing, scheduling, and resource allocation",
+          "Ensure compliance and data security across the platform",
+          "Generate comprehensive reports for decision-making"
+        ]
+      },
+      "all_four_supported": "All four account types are fully supported on both",
+      "and": "and",
+      "deployments": "deployments",
+      "on_premise": "On-Premise",
+      "online_cloud": "Online Cloud"
     },
     "solutions": {
       "title": "Complete Solutions for Every Need",
