@@ -135,6 +135,8 @@ const HomePage = () => {
                       width={500}
                       height={800}
                       className="rounded-md h-full w-full object-contain"
+                       style={{ maxWidth: '500px', height: 'auto' }}
+          loading="eager"
                     />
                   </div>
                 </div>
