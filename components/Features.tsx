@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Building2,
   DollarSign,
@@ -11,9 +13,13 @@ import { ScrollAnimation } from "./animations/ScrollAnimation";
 import { StaggeredAnimation } from "./animations/StaggeredAnimation";
 import Button from "./ui/Button";
 import { useTranslation } from "react-i18next";
+import ContactFormModal from "./ContactFormModal";
+import { useState } from "react";
 
 const Features = () => {
   const { t } = useTranslation();
+    const [isModalOpen, setIsModalOpen] = useState(false); 
+  
 
   const features = [
     {
@@ -109,9 +115,14 @@ const Features = () => {
           {t("features.ready")}
         </p>
 
-        <Button size="lg" className="mt-4">
+        <Button  onClick={() => setIsModalOpen(true)} size="lg" className="mt-4">
           {t("features.cta")}
         </Button>
+
+         <ContactFormModal
+  isOpen={isModalOpen} 
+  onClose={() => setIsModalOpen(false)} 
+/>
       </ScrollAnimation>
     </div>
   );

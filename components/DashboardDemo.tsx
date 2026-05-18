@@ -12,9 +12,11 @@ import Button from "./ui/Button";
 import { ScrollAnimation } from "./animations/ScrollAnimation";
 import AnimatedBackground from "./animations/background/AnimatedBackground";
 import { useTranslation } from "react-i18next";
+import ContactFormModal from "./ContactFormModal";
 
 export default function DashboardDemo() {
   const [data, setData] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); 
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -79,7 +81,7 @@ export default function DashboardDemo() {
 
         {/* LIVE BUTTON */}
         <div className="flex justify-center">
-          <Button>
+          <Button onClick={() => setIsModalOpen(true)}>
             <div
                   className="w-1.5 h-1.5 bg-black rounded-full animate-pulse-scale"
                 ></div>
@@ -106,6 +108,10 @@ export default function DashboardDemo() {
           />
         </div>
       </div>
+       <ContactFormModal
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </ScrollAnimation>
   );
 }
