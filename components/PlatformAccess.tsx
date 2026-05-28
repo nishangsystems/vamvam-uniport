@@ -135,7 +135,7 @@ const PlatformAccess = () => {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="h-full inline-flex flex-col justify-center items-center py-7 px-12 rounded-xl bg-black/10 text-center"
+                  className="h-full w-full inline-flex flex-col justify-center items-center py-7 px-12 rounded-xl bg-black/10 text-center"
                 >
                   <item.icon size={35} strokeWidth={1.8} />
                   {t(`platform.sync.${item.key}`)}
