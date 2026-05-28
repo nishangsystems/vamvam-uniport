@@ -319,8 +319,8 @@ const HomePage = () => {
             <ScrollAnimation animation="fade" threshold={0.1}>
               {activeTab === "student" && (
                 <div className=" mt-20">
-                  <div className="flex flex-wrap justify-between items-center">
-                    <div className="flex-1">
+                  <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 md:grid-cols-2 lg:gap-14">
+                    <div className="min-w-0">
                       <div className="inline-flex bg-blue-500 p-4 rounded-xl mb-4">
                         <GraduationCap size={40} />
                       </div>
@@ -343,7 +343,7 @@ const HomePage = () => {
                         ))}
                       </div>
                     </div>
-                    <div className="flex-1">
+                    <div className="min-w-0">
                       <div className="rounded-3xl bg-gradient-to-b from-blue-500 via-blue-600 to-blue-700 p-10">
                         <div className="rounded-xl bg-white p-4">
                           <div className="flex items-center gap-2">
@@ -376,8 +376,8 @@ const HomePage = () => {
               )}
               {activeTab === "teacher" && (
                 <div className=" mt-20">
-                  <div className="flex flex-wrap justify-between items-center">
-                    <div className="flex-1">
+                  <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 md:grid-cols-2 lg:gap-14">
+                    <div className="min-w-0">
                       <div className="inline-flex bg-gradient-to-r from-green-500 to-green-600 p-4 rounded-xl mb-4">
                         <Users size={40} />
                       </div>
@@ -400,7 +400,7 @@ const HomePage = () => {
                         ))}
                       </div>
                     </div>
-                    <div className="flex-1">
+                    <div className="min-w-0">
                       <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-3xl p-8 shadow-2xl ">
                         <div className="rounded-xl bg-white p-4">
                           <div className="flex items-center gap-2">
@@ -433,8 +433,8 @@ const HomePage = () => {
               )}
               {activeTab === "parent" && (
                 <div className=" mt-20">
-                  <div className="flex flex-wrap justify-between items-center">
-                    <div className="flex-1">
+                  <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 md:grid-cols-2 lg:gap-14">
+                    <div className="min-w-0">
                       <div className="inline-flex  bg-gradient-to-r from-purple-500 to-purple-600  p-4 rounded-xl mb-4">
                         <Users size={40} />
                       </div>
@@ -457,7 +457,7 @@ const HomePage = () => {
                         ))}
                       </div>
                     </div>
-                    <div className="flex-1">
+                    <div className="min-w-0">
                       <div className="bg-gradient-to-br from-purple-500 to-purple-600  rounded-3xl p-8 shadow-2xl ">
                         <div className="rounded-xl bg-white p-4">
                           <div className="flex items-center gap-2">
@@ -490,8 +490,8 @@ const HomePage = () => {
               )}
               {activeTab === "admin" && (
                 <div className=" mt-20">
-                  <div className="flex flex-wrap justify-between items-center">
-                    <div className="flex-1">
+                  <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 md:grid-cols-2 lg:gap-14">
+                    <div className="min-w-0">
                       <div className="inline-flex bg-gradient-to-br from-primary-600 to-primary-500 rounded-2xl p-4 shadow-2xl mb-4">
                         <Users size={40} />
                       </div>
@@ -514,7 +514,7 @@ const HomePage = () => {
                         ))}
                       </div>
                     </div>
-                    <div className="flex-1">
+                    <div className="min-w-0">
                       <div className="bg-gradient-to-br  bg-gradient-to-br from-primary-600 to-primary-500  rounded-3xl p-8 shadow-2xl ">
                         <div className="rounded-xl bg-white p-4">
                           <div className="flex items-center gap-2">
@@ -546,7 +546,7 @@ const HomePage = () => {
                 </div>
               )}
               <div className="flex justify-center mt-20">
-                <div className="inline-flex rounded-full bg-gray-50 px-8 py-2.5">
+                <div className="rounded-full text-center bg-gray-50 px-8 py-2.5">
                   {t("home.accountTypes.all_four_supported")}
                   <span className="text-blue-500 mx-1">
                     {" "}
