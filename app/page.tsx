@@ -12,7 +12,6 @@ import {
   CreditCard,
   Database,
   Download,
-  FileText,
   GraduationCap,
   Mail,
   MapPin,
@@ -21,13 +20,10 @@ import {
   Pause,
   Phone,
   Play,
-  Quote,
   Settings,
   SquareUserRound,
-  Star,
   UserCheck,
   Users,
-  Video,
   Wallet,
 } from "lucide-react";
 import { useRef, useState } from "react";
@@ -35,7 +31,6 @@ import SoftwarePreview from "../components/SoftwarePreview";
 import DashboardDemo from "../components/DashboardDemo";
 import Features from "../components/Features";
 import PlatformAccess from "../components/PlatformAccess";
-import appImage from "../assets/app-preview.png";
 import AnimatedBackground from "@/components/animations/background/AnimatedBackground";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
@@ -51,6 +46,14 @@ const HomePage = () => {
   const [activeTabTestimony, setActiveTabTestimony] = useState<
     "school" | "student"
   >("school");
+
+  // ✅ Add this state for logo error handling
+  const [logoErrors, setLogoErrors] = useState<Record<string, boolean>>({});
+
+  // ✅ Add this handler
+  const handleLogoError = (schoolName: string) => {
+    setLogoErrors((prev) => ({ ...prev, [schoolName]: true }));
+  };
 
   // Get solutions items as array
   const solutionsItems = t("home.solutions.items", {
@@ -135,8 +138,9 @@ const HomePage = () => {
                       width={500}
                       height={800}
                       className="rounded-md h-full w-full object-contain"
-                       style={{ maxWidth: '500px', height: 'auto' }}
-          loading="eager"
+                      // loading="eager"
+                      unoptimized
+                      priority
                     />
                   </div>
                 </div>
@@ -209,46 +213,47 @@ const HomePage = () => {
             </div>
 
             <ScrollAnimation
-  animation="slide-right"
-  className="relative w-full max-w-2xl rounded-3xl overflow-hidden flex-1 aspect-video group"
->
-  <video
-    ref={videoRef}
-    controls={false}
-    className="absolute inset-0 w-full h-full object-cover rounded-3xl"
-    onPlay={() => setIsPlaying(true)}
-    onPause={() => setIsPlaying(false)}
-    onEnded={() => setIsPlaying(false)}
-  >
-    <source src="/videos/demo.mp4" type="video/mp4" />
-    {t("home.about.browserDoesNotSupport")}
-  </video>
-  
-  {/* Custom Play/Pause Button - appears on hover or always visible */}
-  <div 
-    className="absolute inset-0 flex items-center justify-center z-10 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-    onClick={toggleVideoPlayback}
-  >
-    <div className="bg-white rounded-full w-16 h-16 md:w-24 md:h-24 flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg">
-      {isPlaying ? (
-        <Pause className="text-primary-600 ml-0" size={44} />
-      ) : (
-        <Play className="text-primary-600 ml-1" size={44} />
-      )}
-    </div>
-  </div>
-  
-  {/* Optional: Video title overlay (shown when video is not playing) */}
-  {!isPlaying && (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-      <div className="text-center text-white bg-black/50 p-4 rounded-lg backdrop-blur-sm">
-        <p className="text-2xl mb-2 font-bold">{t("home.about.videoTitle")}</p>
-        <p className="text-lg">{t("home.about.videoSubtitle")}</p>
-      </div>
-    </div>
-  )}
-</ScrollAnimation>
+              animation="slide-right"
+              className="relative w-full max-w-2xl rounded-3xl overflow-hidden flex-1 aspect-video group"
+            >
+              <video
+                ref={videoRef}
+                controls={false}
+                className="absolute inset-0 w-full h-full object-cover rounded-3xl"
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
+              >
+                <source src="/videos/demo.mp4" type="video/mp4" />
+                {t("home.about.browserDoesNotSupport")}
+              </video>
 
+              {/* Custom Play/Pause Button - appears on hover or always visible */}
+              <div
+                className="absolute inset-0 flex items-center justify-center z-10 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                onClick={toggleVideoPlayback}
+              >
+                <div className="bg-white rounded-full w-16 h-16 md:w-24 md:h-24 flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg">
+                  {isPlaying ? (
+                    <Pause className="text-primary-600 ml-0" size={44} />
+                  ) : (
+                    <Play className="text-primary-600 ml-1" size={44} />
+                  )}
+                </div>
+              </div>
+
+              {/* Optional: Video title overlay (shown when video is not playing) */}
+              {!isPlaying && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="text-center text-white bg-black/50 p-4 rounded-lg backdrop-blur-sm">
+                    <p className="text-2xl mb-2 font-bold">
+                      {t("home.about.videoTitle")}
+                    </p>
+                    <p className="text-lg">{t("home.about.videoSubtitle")}</p>
+                  </div>
+                </div>
+              )}
+            </ScrollAnimation>
           </div>
         </div>
       </section>
@@ -774,24 +779,61 @@ const HomePage = () => {
               className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12"
             >
               {[
-                { initials: "B", title: "BIAKA" },
-                { initials: "H", title: "HIMS" },
-                { initials: "S", title: "ST LOUIS" },
-                { initials: "D", title: "DEX" },
-                { initials: "D", title: "DAJA" },
-                { initials: "G", title: "GRACIOUS" },
-                { initials: "B", title: "BAPTIST SCHOOL" },
+                {
+                  name: "BIAKA",
+                  initials: "B",
+                  logo: "/images/logos/biaka.jpeg",
+                },
+                {
+                  name: "HIMS",
+                  initials: "H",
+                  logo: "/images/logos/hims.jpeg",
+                },
+                {
+                  name: "ST LOUIS",
+                  initials: "S",
+                  logo: "/images/logos/st-louis.jpeg",
+                },
+                { name: "DEX", initials: "D", logo: "/images/logos/dex.png" },
+                {
+                  name: "DAJA",
+                  initials: "D",
+                  logo: "/images/logos/daja.png",
+                },
+                {
+                  name: "GRACIOUS",
+                  initials: "G",
+                  logo: "/images/logos/gracious.jpeg",
+                },
+                {
+                  name: "BAPTIST SCHOOL",
+                  initials: "B",
+                  logo: "/images/logos/baptist.jpeg",
+                },
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-center p-6 bg-gray-50 rounded-2xl hover:bg-gradient-to-br hover:from-yellow-50 hover:to-yellow-100 transition-all group cursor-pointer"
+                  className="flex items-center justify-center p-6 bg-white rounded-2xl hover:shadow-lg transition-all group cursor-pointer border border-gray-100"
                 >
-                  <div>
-                    <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-primary-600 to-primary-500 rounded-full flex items-center justify-center text-white text-xl">
-                      {item.initials}
+                  <div className="text-center">
+                    <div className="w-20 h-20 mx-auto mb-3 relative">
+                      {logoErrors[item.name] ? (
+                        <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary-600 to-primary-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                          {item.initials}
+                        </div>
+                      ) : (
+                        <Image
+                          src={item.logo}
+                          alt={`${item.name} logo`}
+                          width={80}
+                          height={80}
+                          className="object-contain group-hover:scale-110 transition-transform duration-300 "
+                          onError={() => handleLogoError(item.name)}
+                        />
+                      )}
                     </div>
-                    <p className="text-secondary-200 text-lg group-hover:text-primary-600 transition-colors font-medium">
-                      {item.title}
+                    <p className="text-gray-600 text-sm group-hover:text-primary-600 transition-colors font-medium">
+                      {item.name}
                     </p>
                   </div>
                 </div>
